@@ -5,15 +5,19 @@
 %       Geschichte
 %        Wozu, Verbreitungsgrad
 %        Anwendungsgebiete
-%Funktionsweise: Aufbau und Ablauf einer PPP-Verbindung <--- Michael Sch.
+%Funktionsweise: Aufbau von PPP <--- Michael Sch.
 %        Header, Payload
 %        (Verschiedene Arten von PPP)
 %        Unterprotokolle
-%Alternativen zu PPP <--- Michael St.
-%        Vergleich mit anderen Protos (zB SLIP: http://comment.univie.ac.at/95-3/19/) oder DOCSIS
-%                (aktuelle) Alternativen
+%Ablauf von PPP-Verbindungen <--- Michael St.
+%        Schwerpunkt PPPoE
 %Schlussfolgerung
 %Danksagungen (Acknowledgements)
+%
+% Zu beachten:
+% - 6 pages including pictures and references
+% - Wikipedia is not an allowed reference
+% - And do not use pictures or examples that you can find in the exercises or the lecture.
 \documentclass[journal]{IEEEtran}
 \hyphenation{op-tical net-works semi-conduc-tor} 
 \usepackage[pdftex]{graphicx}
@@ -40,7 +44,65 @@ In folgendem Bild (siehe Bild \ref{fig:PPP-Visualisierung}) wird gezeigt f\"ur w
 \end{figure}
 Neben DSL-Anschl\"ussen gibt es in Deutschland die Alternative des Kabel-Anschlusses. Bei Kabel-Anschl\"ussen wird nicht das PPP-Protokoll zum Aufbau einer Verbindung genutzt, sondern das DOCSIS-Protokoll zusammen mit einer DHCP-\"ahnlichen \cite{RFC3256} Funktionsweise. 
 \section{Section Heading Here}
-\section{Alternativen zu PPP}
+\section{Kommunikationsabläufe}
+Das PPP eignet sich für die Übertragung über einer Vielzahl an Physical Layer Protokollen.
+Hierzu zählen unter anderem  Synchronous Optical Network (SONET), GPRS-/UMTS oder auch
+die weit verbeitete PPPoE-Variante in Verbindung mit Direct Subscriber Line (DSL) Anschlüssen\cite{IEEEhowto:kopka}.
+An dieser Stelle wird exemplarisch der Kommunikationsablauf anhand von PPPoE aufgezeigt.
+\subsection{PPP over Ethernet}
+Dass PPPoE Protokoll ist in RFC 2516 spezifiziert \cite{RFC2516} und ermöglicht die Übertragung
+von Ethernet-Rahmen über eine PPP-Verbindung.
+Diese ermöglicht die Kombination der Authentifizierungsfunktionen von PPP mit den
+Simultanen Zugriffsmöglichkeiten des Ethernet. Weitere Vorteile sind die Ermöglichung
+von Breitbandzugängen für viele DSL-Anschlüsse, Wireless-Zugängen oder Kabelmodems sowie
+Kompatibiliät mit allen exisitieren DSL-Modems.\\
+%
+Der strukturelle Aufbau eines typischen PPPoE-Pakets ist in \ref{fig:PPPoE_Bild} zu sehen.
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=0.5\textwidth]{img/pppoe_aufbau.jpg}
+ \caption{Aufbau eines PPPoE-Pakets (Entnommen aus \cite{PPPoE_Bild})}
+ \label{fig:PPPoE_Bild}
+\end{figure}
+Hierbei ist die Verschachtelung der Protokolle der einzelnen Layer zu erkennen: Die unterste
+Ebene bildet Ethernet, gefolgt von PPPoE zur PPP bis zum Internet Protokoll.
+Der Aufbau von Ethernet und IP-Paketen wird als bekannt vorausgesetzt und hier nicht näher erläutert.\\
+%
+Die Bedeutung der PPPoE und PPP header ist in Tabelle \ref{tab:PPPoE_fields} dargestellt.
+%
+\begin{tabular}{|l|p{6.5cm}|}
+\hline 
+Ver & Verwendete Version des PPPoE \\ 
+\hline 
+Type & Verwendeter Typ des PPPoE  \\ 
+\hline 
+Code & Typ des PPPoE\-Pakets: 0x00 = Sitzungsdaten; 0x09 = PADI; 0x07 = PADO oder PADT;
+0x19 = PADR; 0x65 indicates PADS\\ 
+\hline 
+Session\_ID & Eindeutiger identifier einer PPP\-Sitzung\\ 
+\hline 
+Length & Länge des PPPoE\-Payloads\\ 
+\hline 
+Protocol & Protokolltyp des nächsten Layers\\ 
+\hline
+\label{tab:PPPoE_fields}
+\end{tabular} 
+%
+Der Ablauf einer PPPoE Session kann in die drei Phasen Discovery, Session und Terminate aufgteilt werden.
+Diese werden in Abbildung in den folgenden Abschnitten näher erläutert.
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=0.5\textwidth]{img/pppoe_sequenz1.png}
+ \caption{Ablauf einer PPPoE-Session (Entnommen aus \cite{PPPoE_Bild})}
+ \label{fig:PPPoE_sequenz1}
+\end{figure}
+\subsubsection{Discovery}
+tbd
+\subsubsection{Session}
+tbd
+\subsubsection{Terminate}
+tbd
+%
 %
 \section{Conclusion} 
 The conclusion goes here. 
@@ -71,29 +133,32 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
   0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999. 
 Andrew S. Tanenbaum: Computer Networks, 5.th edition, Prentice Hall, 2011
 James F. Kurose / Keith W. Ross, Computernetzwerke, Pearson, 2012
-RFC 1661 – Point-to-Point Protocol (PPP) July 1994;
-RFC 1662 – Point-to-Point Protocol in HDLC-like Framing
-RFC 1962, PPP Compression Control Protocol (CCP)
-RFC 1963, PPP Serial Data transport Protocol
-RFC 1990, The PPP Multilink Protocol (MP)
-RFC 1994, PPP Challenge Handshake Authentication Protocol (CHAP)
-RFC 2153, Informational, PPP Vendor Extensions
-RFC 2284, PPP Extensible Authentication Protocol (EAP)
-RFC 2364, PPP over ATM
-RFC 2516, PPP over Ethernet
-RFC 2615, PPP over SONET/SDH
-RFC 2686, The Multi-Class Extension to Multi-Link PPP
-RFC 2687, Proposed Standard, PPP in a Real-time Oriented HDLC-like Framing
-RFC 5072, IP Version 6 over PPP
-RFC 5172, Negotiation for IPv6 Datagram Compression Using IPv6 Control Protocol
-RFC 6361, PPP Transparent Interconnection of Lots of Links (TRILL) Protocol Control Protocol
+
+%RFC 1661 – Point-to-Point Protocol (PPP) July 1994;
+%RFC 1662 – Point-to-Point Protocol in HDLC-like Framing
+%RFC 1962, PPP Compression Control Protocol (CCP)
+%RFC 1963, PPP Serial Data transport Protocol
+%RFC 1990, The PPP Multilink Protocol (MP)
+%RFC 1994, PPP Challenge Handshake Authentication Protocol (CHAP)
+%RFC 2153, Informational, PPP Vendor Extensions
+%RFC 2284, PPP Extensible Authentication Protocol (EAP)
+%RFC 2364, PPP over ATM
+%RFC 2516, PPP over Ethernet
+%RFC 2615, PPP over SONET/SDH
+%RFC 2686, The Multi-Class Extension to Multi-Link PPP
+%RFC 2687, Proposed Standard, PPP in a Real-time Oriented HDLC-like Framing
+%RFC 5072, IP Version 6 over PPP
+%RFC 5172, Negotiation for IPv6 Datagram Compression Using IPv6 Control Protocol
+%RFC 6361, PPP Transparent Interconnection of Lots of Links (TRILL) Protocol Control Protocol
+\bibitem{RFC2516} A Method for Transmitting PPP Over Ethernet (PPPoE) (IETF RFC2516), \newblock L. Mamakos, \newblock K. Lidl, \newblock J. Evarts, \newblock 1999.
 \bibitem{RFC2637} Point-to-Point Tunneling Protocol (IETF RFC 2637), \newblock K. Hamzeh, \newblock The Internet Society, \newblock Juli, \newblock 1999.
 \bibitem{RFC1661} Point-to-Point Protocol (IETF RFC 1661), \newblock W. Simpson, \newblock The Internet Society, \newblock Juli, \newblock 1994.
 \bibitem{RFC2364} Point-to-Point Protocol over AAL5 (IETF RFC 2364), \newblock  G. Gross, \newblock The Internet Society, \newblock Juli, \newblock 1998.
 \bibitem{RFC2516} Point-to-Point Protocol over Ethernet (IETF RFC 2516), \newblock  L. Mamakos, \newblock The Internet Society, \newblock Februar, \newblock 1999.
 \bibitem{RFC3256} The DOCSIS (Data-Over-Cable Service Interface Specifications) Device Class DHCP (Dynamic Host Configuration Protocol) Relay Agent Information Sub-option (IETF RFC 3256), \newblock  D. Jones
 , \newblock The Internet Society, \newblock April, \newblock 2002.
-\bibitem{PPP-Bild} Veranschaulichung einer PPP-Verbindung, \newblock  Vicomsoft
-, \newblock http://www.vicomsoft.com/learning-center/pppoe/.
+\bibitem{PPP-Bild} Veranschaulichung einer PPP-Verbindung, \newblock Vicomsoft, \newblock http://www.vicomsoft.com/learning-center/pppoe/
+%\bibitem{RFC1055} http://tools.ietf.org/html/rfc1055
+%\bibitem{PPPoE_Bild} Aufbau eines PPPoE\-Pakets,\newblock H3C \newblock http://www.h3c.com/portal/Products___Solutions/Technology/WAN/Technology_White_Paper/200911/654415_57_0.htm
 \end{thebibliography} 
 \end{document} 

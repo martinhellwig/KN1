@@ -12,7 +12,6 @@
 %Ablauf von PPP-Verbindungen <--- Michael St.
 %        Schwerpunkt PPPoE
 %Schlussfolgerung
-%Danksagungen (Acknowledgements)
 %
 % Zu beachten:
 % - 6 pages including pictures and references
@@ -28,14 +27,14 @@
 \IEEEauthorblockA{\\Kommunikationsnetze 1\\ Technische Universit\"at Darmstadt\\} }
 \maketitle 
 \begin{abstract} 
-The abstract goes here. The abstract is abstract because it's abstrct. (qed) Was laberst du?^^
+Diese Arbeit behandelt das Thema Point-to-Point Protocol (PPP). Dieses Protokoll wurde als Ersatz f\"ur fr\"uhere Einwahlprotokolle entwickelt. Heutzutage findet es seine Hauptanwendung beim Einw\"ahlen via DSL. Neben der technischen Umsetzung und Spezifikation wird in dieser Arbeit auch ein m\"oglicher Verbindugsaufbau via PPP gezeigt.
 \end{abstract} 
 \begin{IEEEkeywords} 
 PPP, PPPoE, PPPoA, Point-to-Point. 
 \end{IEEEkeywords}
 \section{Einleitung} 
-\IEEEPARstart{D}{as} Point-to-Point Protocol wurde urspr\"unglich im Jahr 1994 von W. Simpson entwickelt. Im OSI-Modell ist es zusammen mit anderen Protokollen in der DataLink-Schicht daf\"ur zust\"andig eine direkte Verbindung zwischen zwei Clients �ber ein leitungsvermittelndes Netz herzustellen. F\"ur diesen Zweck werden auch M\"oglichkeiten der Authentifizierung spezifiziert \cite{RFC1661}. Die Protokolle der OSI-Netzwerk-Schicht k\"onnen dann die bestehende PPP-Verbindung zur \"Ubermittlung von Daten nutzen. Eine PPP-Verbindung (beispielsweise zwischen ISPs, Routern, Hosts oder Netzwerkbr\"ucken) ist eine Full-Duplex Verbindung und versucht die zu \"ubermittelnden Pakete in der richtigen Reihenfolge zu \"ubertragen.\\
-Die Notwendigkeit dieses Protokolls war zu dieser Zeit sehr hoch, da \"altere Standards, wie SLIP (zusammen mit ISDN), nicht mehr zeitgem\"a\ss{} waren. Speziell f\"ur die Internetverbindung f\"ur Heimanwender wurde f\"ur den alten ISDN-Standard ein Ersatz erschaffen. Eine Eigenschaft des Point-to-Point Protokolls ist es, leicht zu bedienen und f\"ur anderen Protokolle leicht zu nutzen zu sein. Mit den beiden Unter-Protokollen PPPoE (Point-to-Point over Ethernet)\cite{RFC2516} und PPPoA (Point-to-Point over ATM)\cite{RFC2364} kann man sich nun mithilfe eines Routers direkt mit dem Provider verbinden, was h\"ohere Datenraten zul\"asst. Dabei bleibt aber weiterhin der Vorteil (welcher zum Beispiel bei ISDN vorhanden ist), dass man zeitgebundene Tarife f\"ur die Endkunden anbieten und abrechnen kann. Bei heutigen DSL-Anschl\"ussen besitzt man zwar eine dauerhafte physikalische Verbindung zum Provider, doch erst mit dem Aufbau der PPP-Verbindung ist man auch virtuell mit dem Provider verbunden und kann somit das Internet nutzen. Nicht nur f\"ur heimische Internet-Anschl\"usse wird PPP genutzt, sondern in allen Netzwerkverbindungen, in welchen man sich erst einw\"ahlen muss. Dazu geh\"ort auch das Mobilfunktnetz oder auch die Einwahl �ber eine ISDN-Verbindung.\\
+\IEEEPARstart{D}{as} Point-to-Point Protocol wurde urspr\"unglich im Jahr 1994 von W. Simpson entwickelt. Im OSI-Modell ist es zusammen mit anderen Protokollen in der DataLink-Schicht daf\"ur zust\"andig eine direkte Verbindung zwischen zwei Clients \"uber ein leitungsvermittelndes Netz herzustellen. F\"ur diesen Zweck werden auch M\"oglichkeiten der Authentifizierung spezifiziert \cite{RFC1661}. Ebenfalls besteht die M\"oglichkeit die Daten zu verschl\"usseln oder zu komprimieren. Die Protokolle der OSI-Netzwerk-Schicht k\"onnen dann die bestehende PPP-Verbindung zur \"Ubermittlung von Daten nutzen. Eine PPP-Verbindung (beispielsweise zwischen ISPs, Routern, Hosts oder Netzwerkbr\"ucken) ist eine Full-Duplex Verbindung und versucht die zu \"ubermittelnden Pakete in der richtigen Reihenfolge zu \"ubertragen.\\
+Die Notwendigkeit dieses Protokolls war zu dieser Zeit sehr hoch, da \"altere Standards, wie beispielsweise SLIP, nicht mehr zeitgem\"a\ss{} waren. Ebenfalls wurde der Telefon-Standard "Link Access Protocol, Balanced", welcher in der X.25-Protokollfamilie benutzt wurde, durch PPP ersetzt.  Speziell f\"ur die Internetverbindung f\"ur Heimanwender wurde f\"ur den alten ISDN-Standard ein Ersatz erschaffen. Eine Eigenschaft des Point-to-Point Protokolls ist es, f\"ur andere Protokolle der Netzwerk-Schicht leicht zu bedienen und zu nutzen zu sein. Mit den beiden Unter-Protokollen PPPoE (Point-to-Point over Ethernet)\cite{RFC2516} und PPPoA (Point-to-Point over ATM)\cite{RFC2364} kann man sich nun mithilfe eines Routers direkt mit dem Provider verbinden, was h\"ohere Datenraten zul\"asst. Dabei bleibt aber weiterhin der Vorteil (welcher zum Beispiel bei ISDN vorhanden ist), dass man zeitgebundene Tarife f\"ur die Endkunden anbieten und abrechnen kann. Bei heutigen DSL-Anschl\"ussen besitzt man zwar eine dauerhafte physikalische Verbindung zum Provider, doch erst mit dem Aufbau der PPP-Verbindung ist man auch virtuell mit dem Provider verbunden und kann somit das Internet nutzen. Nicht nur f\"ur heimische Internet-Anschl\"usse wird PPP genutzt, sondern in allen Netzwerkverbindungen, in welchen man sich erst einw\"ahlen muss. Dazu geh\"ort auch das Mobilfunktnetz oder auch die Einwahl \"uber eine ISDN-Verbindung.\\
 In folgendem Bild (siehe Bild \ref{fig:PPP-Visualisierung}) wird gezeigt f\"ur welchen Zweck das PPP-Protokoll bei DSL-Zug\"angen genutzt wird. Dabei stellt der heimische Router eine feste virtuelle Verbindung zu der Gegenstelle des Providers her, welche (aktuell in Deutschland so geregelt) im Normalfall alle 24 Stunden neu aufgebaut wird, da dann die Verbindung seitens des Anbieters automatisch getrennt wird. \\
 \begin{figure}[h!]
  \centering
@@ -43,29 +42,33 @@ In folgendem Bild (siehe Bild \ref{fig:PPP-Visualisierung}) wird gezeigt f\"ur w
  \caption{Darstellung einer PPP-Verbindung zwischen Heimanwender und ISP (Entnommen aus \cite{PPP-Bild})}
  \label{fig:PPP-Visualisierung}
 \end{figure}
-Neben DSL-Anschl\"ussen gibt es in Deutschland die Alternative des Kabel-Anschlusses. Bei Kabel-Anschl\"ussen wird nicht das PPP-Protokoll zum Aufbau einer Verbindung genutzt, sondern das DOCSIS-Protokoll zusammen mit einer DHCP-\"ahnlichen \cite{RFC3256} Funktionsweise. 
+Neben DSL-Anschl\"ussen gibt es in Deutschland die Alternative des Kabel-Anschlusses. Bei Kabel-Anschl\"ussen wird nicht das PPP-Protokoll zum Aufbau einer Verbindung genutzt, sondern das DOCSIS-Protokoll zusammen mit einer DHCP-\"ahnlichen \cite{RFC3256} Funktionsweise. \\
+\\
+\newline
+Sektion 2 behandelt die Funktionsweise von PPP zusammen mit dem Aufbau des PPP-Headers. Sektion 3 beschreibt einen Verbindungsaufbau am Beispiel einer PPPoE-Verbindung. In Sektion 4 ziehen wir ein Fazit zu den hier vorgestellten Fakten zu PPP.
+
 \section{Section Heading Here}
-\section{Kommunikationsabläufe}
-Das PPP eignet sich für die Übertragung über eine Vielzahl an Physical Layer Protokollen.
-Hierzu zählen unter anderem  Synchronous Optical Network (SONET), GPRS-/UMTS oder auch
-in Verbindung mit Ethernet über die weit verbeitete PPPoE-Variante für die Übertragung
-über Direct Subscriber Line (DSL) Anschlüsse\cite{IEEEhowto:kopka}.
+\section{KommunikationsablÃ¤ufe}
+Das PPP eignet sich fÃ¼r die Ãœbertragung Ã¼ber eine Vielzahl an Physical Layer Protokollen.
+Hierzu zÃ¤hlen unter anderem  Synchronous Optical Network (SONET), GPRS-/UMTS oder auch
+in Verbindung mit Ethernet Ã¼ber die weit verbeitete PPPoE-Variante fÃ¼r die Ãœbertragung
+Ã¼ber Direct Subscriber Line (DSL) AnschlÃ¼sse\cite{IEEEhowto:kopka}.
 An dieser Stelle wird exemplarisch der Kommunikationsablauf anhand von PPPoE aufgezeigt.
 \subsection{PPP over Ethernet}
-Das PPPoE Protokoll ist in RFC 2516 spezifiziert und wurde ursprünglich
+Das PPPoE Protokoll ist in RFC 2516 spezifiziert und wurde ursprÃ¼nglich
 von den Firmen UUNET, Redback Networks und Router Waree entwickelt \cite{RFC2516}.
-PPPoE ermöglicht die Übertragung von PPP-Paketen auf Basis von Ethernet, wodurch
+PPPoE ermÃ¶glicht die Ãœbertragung von PPP-Paketen auf Basis von Ethernet, wodurch
 die Authentifizierungsfunktionen von PPP mit den
-simultanen Zugriffsmöglichkeiten des Ethernet kombiniert werden.
-Die Notwendigkeit für PPPoE resultierte aus dem Anfang dieses Jahrtausends
+simultanen ZugriffsmÃ¶glichkeiten des Ethernet kombiniert werden.
+Die Notwendigkeit fÃ¼r PPPoE resultierte aus dem Anfang dieses Jahrtausends
 einhergehenden Einzugs der DSL-Technologie und der notwendigen Umstrukturierung
-der benötigten Software und Hardware. Ziel war es, ein Protokoll zu entwickeln,
-welches die bis dahin vorherrschende Einwahl-Verfahren möglichst kostengünstig
-ersetzt. Mit PPPoE war es einerseits möglich die bis dahin bestehenden Software-Stacks für PPP
-mit minimalen Anpassungen weiter zu verwenden und ließ sich andererseits mit einfacher
-und damit günstiger Hardware umsetzen\cite{dslapp}.
-Eines der Haupteinsatzgebiete von PPPoE sind somit Breitbandzugänge über DSL-Anschlüsse,
-Wireless-Zugängen oder Kabelmodems und wird
+der benÃ¶tigten Software und Hardware. Ziel war es, ein Protokoll zu entwickeln,
+welches die bis dahin vorherrschende Einwahl-Verfahren mÃ¶glichst kostengÃ¼nstig
+ersetzt. Mit PPPoE war es einerseits mÃ¶glich die bis dahin bestehenden Software-Stacks fÃ¼r PPP
+mit minimalen Anpassungen weiter zu verwenden und lieÃŸ sich andererseits mit einfacher
+und damit gÃ¼nstiger Hardware umsetzen\cite{dslapp}.
+Eines der Haupteinsatzgebiete von PPPoE sind somit BreitbandzugÃ¤nge Ã¼ber DSL-AnschlÃ¼sse,
+Wireless-ZugÃ¤ngen oder Kabelmodems und wird
 auch von vielen Internet Service Providern (ISP) zu diesem Zweck eingesetzt \cite[p.88]{cisconut}.\\
 %
 Der strukturelle Aufbau eines typischen PPPoE-Pakets ist in Abbildung \ref{fig:PPPoE_Bild} zu sehen.
@@ -77,7 +80,7 @@ Der strukturelle Aufbau eines typischen PPPoE-Pakets ist in Abbildung \ref{fig:P
 \end{figure}
 Hierbei ist die Verschachtelung der Protokolle der einzelnen Layer zu erkennen: Die unterste
 Ebene bildet Ethernet, gefolgt von PPPoE zur PPP bis zum Internet Protokoll.
-Der Aufbau von Ethernet und IP-Paketen wird als bekannt vorausgesetzt und hier nicht näher erläutert.\\
+Der Aufbau von Ethernet und IP-Paketen wird als bekannt vorausgesetzt und hier nicht nÃ¤her erlÃ¤utert.\\
 %
 Die Bedeutung der PPPoE header ist in Tabelle \ref{tab:PPPoE_fields} dargestellt.
 %
@@ -93,17 +96,17 @@ Code & Typ des PPPoE\-Pakets: 0x00 = Sitzungsdaten; 0x09 = PADI; 0x07 = PADO ode
 \hline 
 Session\_ID & Eindeutiger identifier einer PPP\-Sitzung\\ 
 \hline 
-Length & Länge des PPPoE\-Payloads\\ 
+Length & LÃ¤nge des PPPoE\-Payloads\\ 
 \hline 
-Protocol & Protokolltyp des nächsten Layers\\ 
+Protocol & Protokolltyp des nÃ¤chsten Layers\\ 
 \hline
 \end{tabular}
 \end{figure}
-% TODO: scheiß label für Tabelle???
+% TODO: scheiÃŸ label fÃ¼r Tabelle???
 \label{tab:PPPoE_fields}
 %
 Der Ablauf einer PPPoE-Verbindung teilt sich in die drei Phasen Discovery, Session und Terminate
-ein. Diese werden in Abbildung \ref{fig:PPPoEsequenz1} in den folgenden Abschnitten näher erläutert (vgl. \cite{RFC2516}).\\
+ein. Diese werden in Abbildung \ref{fig:PPPoEsequenz1} in den folgenden Abschnitten nÃ¤her erlÃ¤utert (vgl. \cite{RFC2516}).\\
 %
 \begin{figure}[h!]
  \centering
@@ -114,19 +117,19 @@ ein. Diese werden in Abbildung \ref{fig:PPPoEsequenz1} in den folgenden Abschnit
 \subsubsection{Discovery}
 Das Ziel dieser Phase ist das Auffinden der MAC-Adresse des Servers (auch Concentrator genannt)
 sowie das Ableiten einer PPPoE Session-ID durch den Client (auch Host genannt).
-Abhängig von der Topologie können sich mehrere Server im Netzwerk befinden, welche in
+AbhÃ¤ngig von der Topologie kÃ¶nnen sich mehrere Server im Netzwerk befinden, welche in
 dieser Phase durch den Client entdeckt werden. Die Discovery-Phase selbst ist zustandslos, d.h.
 auf Seiten aller Kommunikationen werden keine Verbindungsinformationen gespeichert.\\
 Das erste gesendete PPPoE Active Discovery Initiation (PADI) Paket stellt ein Broadcast
-an alle im Netzwerk vorhanden Server dar. Dieses enthält den Namen des vom Client
+an alle im Netzwerk vorhanden Server dar. Dieses enthÃ¤lt den Namen des vom Client
 angefragten Service, auf welches Server mit einem
 PPPoE Active Discovery Offer (PADO) Paket antworten. Das Antwortpaket
-hat als Zieladresse die des Clients und enthält neben dem Namen des Servers optional
+hat als Zieladresse die des Clients und enthÃ¤lt neben dem Namen des Servers optional
 weitere vom Server angebotene Service-Namen. Es folgt ein PPPoE Active Discovery Request (PADR) Paket
-mit welchem der Client den von ihm nun gewählten Server und Service unter allen
+mit welchem der Client den von ihm nun gewÃ¤hlten Server und Service unter allen
 gefundenen direkt addressiert. Nach Erhalt des PADR beginnt der Server mit dem Aufbau
-einer PPP Session und bestätigt dies mit einem PPPoE Active Discovery Session-confirmation (PADS) Paket.
-Diese enthält auch eine Session-ID, welche die folgende Session eindeutig Identifiziert.
+einer PPP Session und bestÃ¤tigt dies mit einem PPPoE Active Discovery Session-confirmation (PADS) Paket.
+Diese enthÃ¤lt auch eine Session-ID, welche die folgende Session eindeutig Identifiziert.
 \subsubsection{Session}
 In der Sitzungsphase erfolgt die weitere Konfiguration der Verbindung, die Authentifikation des
 Clients sowie der eigentliche Datenaustausch. Dieser ist im Gegensatz zur Discovery und Terminate
@@ -140,19 +143,15 @@ Phase PPP-spezifisch und in Abbildung \ref{fig:PPPoEsequenz2} genauer dargestell
 \end{figure}
 % 
 \subsubsection{Terminate}
-Die PPPoE Verbindung kann jederzeit von beiden Kommunikationspartner beendet werden. Hierfür sendet
+Die PPPoE Verbindung kann jederzeit von beiden Kommunikationspartner beendet werden. HierfÃ¼r sendet
 der Client oder der Server ein PPPoE Active Discovery Terminate (PADT) Paket. Nach Erhalt dieses
-Pakets ist kein weiterer Datenaustausch über die Session erlaubt.
+Pakets ist kein weiterer Datenaustausch Ã¼ber die Session erlaubt.
 %
-%
-\section{Conclusion} 
-The conclusion goes here. 
-\subsection{Subsection Heading Here} 
-Subsection text here. 
-% needed in second column of first page if using \IEEEpubid 
-%\IEEEpubidadjcol 
-\subsubsection{Subsubsection Heading Here} 
-Subsubsection text here. 
+
+
+\section{Fazit} 
+Wie in der Einf\"uhrung erw\"ahnt, war das Point-to-Point Protocol notwendig, da die damals aktuellen Standards nicht alle mittlerweile ben\"otigten Anforderungen erf\"ullen konnten. Durch die einfache Handhabung der aufgebauten verbindung f\"ur Netzwerk-Schicht-Protokolle, ist vermutlich auch die grosse Verbreitung des Protokolls zu erkl\"aren. Bei fast allen M\"oglichkeiten eine Internetverbindung aufzubauen (sei es \"uber DSL oder im Mobilfunknetz) wird PPP als Einw\"ahlprotokoll genutzt. Zwar wird im Kabelnetz mittlerweile ein anderes Protokoll verwendet, doch durch die einfache Umsetzung des Point-to-Point Protokolls wird es wahrscheinlich noch einige Jahre der Standard beim Verbinden mit dem ISP sein.
+
 \appendices 
 \section{Proof of the First Zonklar Equation} 
 Appendix one text goes here. 
@@ -175,8 +174,8 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 Andrew S. Tanenbaum: Computer Networks, 5.th edition, Prentice Hall, 2011
 James F. Kurose / Keith W. Ross, Computernetzwerke, Pearson, 2012
 
-%RFC 1661 – Point-to-Point Protocol (PPP) July 1994;
-%RFC 1662 – Point-to-Point Protocol in HDLC-like Framing
+%RFC 1661 â€“ Point-to-Point Protocol (PPP) July 1994;
+%RFC 1662 â€“ Point-to-Point Protocol in HDLC-like Framing
 %RFC 1962, PPP Compression Control Protocol (CCP)
 %RFC 1963, PPP Serial Data transport Protocol
 %RFC 1990, The PPP Multilink Protocol (MP)
@@ -200,7 +199,7 @@ James F. Kurose / Keith W. Ross, Computernetzwerke, Pearson, 2012
 , \newblock The Internet Society, \newblock April, \newblock 2002.
 \bibitem{PPP-Bild} Veranschaulichung einer PPP-Verbindung, \newblock Vicomsoft, \newblock http://www.vicomsoft.com/learning-center/pppoe/
 \bibitem{cisconut} Cisco IOS in a Nutshell \newblock James Boney, \newblock O'Reilly Media \newblock 2005
-\bibitem{dslapp} Implementation and Applications of DSL Technology, \newblock Philip Golden Hervé Dedieu, \newblock Krista S. Jacobsen, \newblock 1998
+\bibitem{dslapp} Implementation and Applications of DSL Technology, \newblock Philip Golden HervÃ© Dedieu, \newblock Krista S. Jacobsen, \newblock 1998
 %\bibitem{RFC1055} http://tools.ietf.org/html/rfc1055
 \bibitem{PPPoEBild} Aufbau eines PPPoE-Pakets,\newblock H3C \newblock http://www.h3c.com/portal/Products\_\_\_Solutions/Technology/WAN/Technology\_White\_Paper/200911/654415\_57\_0.htm
 \bibitem{pppoesequenz1} Ablauf eine PPPoE-Verbindung,\newblock xxx \newblock http://

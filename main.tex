@@ -19,6 +19,7 @@
 % - Wikipedia is not an allowed reference
 % - And do not use pictures or examples that you can find in the exercises or the lecture.
 \documentclass[journal]{IEEEtran}
+\usepackage[utf8x]{inputenc}
 \hyphenation{op-tical net-works semi-conduc-tor} 
 \usepackage[pdftex]{graphicx}
 \begin{document} 
@@ -44,18 +45,28 @@ In folgendem Bild (siehe Bild \ref{fig:PPP-Visualisierung}) wird gezeigt f\"ur w
 \end{figure}
 Neben DSL-Anschl\"ussen gibt es in Deutschland die Alternative des Kabel-Anschlusses. Bei Kabel-Anschl\"ussen wird nicht das PPP-Protokoll zum Aufbau einer Verbindung genutzt, sondern das DOCSIS-Protokoll zusammen mit einer DHCP-\"ahnlichen \cite{RFC3256} Funktionsweise. 
 \section{Section Heading Here}
-\section{Kommunikationsabl\"aufe}
-Das PPP eignet sich f\"ur die \"Ubertragung \"uber einer Vielzahl an Physical Layer Protokollen.
-Hierzu z\"ahlen unter anderem  Synchronous Optical Network (SONET), GPRS-/UMTS oder auch
-die weit verbeitete PPPoE-Variante in Verbindung mit Direct Subscriber Line (DSL) Anschl\"ussen\cite{IEEEhowto:kopka}.
+\section{Kommunikationsabläufe}
+Das PPP eignet sich für die Übertragung über eine Vielzahl an Physical Layer Protokollen.
+Hierzu zählen unter anderem  Synchronous Optical Network (SONET), GPRS-/UMTS oder auch
+in Verbindung mit Ethernet über die weit verbeitete PPPoE-Variante für die Übertragung
+über Direct Subscriber Line (DSL) Anschlüsse\cite{IEEEhowto:kopka}.
 An dieser Stelle wird exemplarisch der Kommunikationsablauf anhand von PPPoE aufgezeigt.
 \subsection{PPP over Ethernet}
-Dass PPPoE Protokoll ist in RFC 2516 spezifiziert \cite{RFC2516} und erm\"oglicht die \"Ubertragung
-von Ethernet-Rahmen \"uber eine PPP-Verbindung.
-Diese ermöglicht die Kombination der Authentifizierungsfunktionen von PPP mit den
-Simultanen Zugriffsmöglichkeiten des Ethernet. Weitere Vorteile sind die Ermöglichung
-von Breitbandzugängen für viele DSL-Anschlüsse, Wireless-Zugängen oder Kabelmodems sowie
-Kompatibiliät mit allen exisitieren DSL-Modems.\\
+Dass PPPoE Protokoll ist in RFC 2516 spezifiziert und wurde ursprünglich
+von den Firmen UUNET, Redback Networks und Router Waree ntwickelt \cite{RFC2516}.
+PPPoE ermöglicht die Übertragung von PPP-Paketen auf Basis von Ethernet wodurch
+die Authentifizierungsfunktionen von PPP mit den
+simultanen Zugriffsmöglichkeiten des Ethernet kombiniert werden.
+Die Notwendigkeit für PPPoE resultierte aus dem anfang dieses Jahrtausends
+einhergehenden Einzugs der DSL-Technologie und der notwendigen Umstrukturierung
+der benötigten Software und Hardware. Ziel war es ein Protokoll zu entwickeln
+welches die bis dahin vorherrschende Einwahl-Verfahren möglichst Kostengünstig
+ersetzt. Mit PPPoE war es einerseits möglich die bis dahin bestehenden Software-Stacks für PPP
+mit minimalen Anpassungen weiter zu verwenden und ließ sich andererseits mit einfacher
+und damit günstiger Hardware umsetzen\cite{dslapp}.
+Eines der Haupteinsatzgebiete von PPPoE sind somit Breitbandzugänge über DSL-Anschlüsse,
+Wireless-Zugängen oder Kabelmodems und wird
+auch von vielen Internet Service Providern (ISP) zu diesem Zweck eingesetzt \cite[p.88]{cisconut}.\\
 %
 Der strukturelle Aufbau eines typischen PPPoE-Pakets ist in \ref{fig:PPPoE_Bild} zu sehen.
 \begin{figure}[h!]
@@ -68,13 +79,14 @@ Hierbei ist die Verschachtelung der Protokolle der einzelnen Layer zu erkennen: 
 Ebene bildet Ethernet, gefolgt von PPPoE zur PPP bis zum Internet Protokoll.
 Der Aufbau von Ethernet und IP-Paketen wird als bekannt vorausgesetzt und hier nicht näher erläutert.\\
 %
-Die Bedeutung der PPPoE und PPP header ist in Tabelle \ref{tab:PPPoE_fields} dargestellt.
+Die Bedeutung der PPPoE header ist in Tabelle \ref{tab:PPPoE_fields} dargestellt.
 %
+\begin{figure}[h!]
 \begin{tabular}{|l|p{6.5cm}|}
 \hline 
-Ver & Verwendete Version des PPPoE \\ 
+Ver & Verwendete Version des PPPoE, immer 1\\ 
 \hline 
-Type & Verwendeter Typ des PPPoE  \\ 
+Type & Verwendeter Typ des PPPoE, immer 1\\ 
 \hline 
 Code & Typ des PPPoE\-Pakets: 0x00 = Sitzungsdaten; 0x09 = PADI; 0x07 = PADO oder PADT;
 0x19 = PADR; 0x65 indicates PADS\\ 
@@ -85,11 +97,14 @@ Length & Länge des PPPoE\-Payloads\\
 \hline 
 Protocol & Protokolltyp des nächsten Layers\\ 
 \hline
+\end{tabular}
+\end{figure}
+% TODO: scheiß label für Tabelle???
 \label{tab:PPPoE_fields}
-\end{tabular} 
 %
-Der Ablauf einer PPPoE Session kann in die drei Phasen Discovery, Session und Terminate aufgteilt werden.
-Diese werden in Abbildung in den folgenden Abschnitten näher erläutert.
+Der Ablauf einer PPPoE-Verbindung teilt sich in die drei Phasen Discovery, Session und Terminate
+ein. Diese werden in Abbildung in den folgenden Abschnitten näher erläutert (vgl. \cite{RFC2516}).\\
+%
 \begin{figure}[h!]
  \centering
   \includegraphics[width=0.5\textwidth]{img/pppoe_sequenz1.png}
@@ -97,11 +112,37 @@ Diese werden in Abbildung in den folgenden Abschnitten näher erläutert.
  \label{fig:PPPoE_sequenz1}
 \end{figure}
 \subsubsection{Discovery}
-tbd
+Das Ziel dieser Phase ist das Auffinden der MAC-Adresse des Servers (auch Concentrator genannt)
+sowie das Ableiten einer PPPoE Session-ID durch den Client (auch Host genannt).
+Abhängig von der Topologie können sich mehrere Server im Netzwerk befinden, welche in
+dieser Phase durch den Client entdeckt werden. Die discovery-Phase selbst ist Zustandslos, d.h.
+auf Seiten aller Kommunikations werden keine Verbindungsinformationen gespeichert.\\
+Das erste gesendete PPPoE Active Discovery Initiation (PADI) Paket stellt ein Broadcast
+an alle im Netzwerk vorhanden Server dar. Dieses enthält den Namen des vom Client
+angefragten Service, auf welches Server mit einem
+PPPoE Active Discovery Offer (PADO) Paket antworten. Das Antwortpaket
+hat als Zieladresse die des Clients und enthält neben dem Namen des Servers optional
+weitere vom Server angebotene Service-Namen. Es folgt ein PPPoE Active Discovery Request (PADR) Paket
+mit welchem der Client den von ihm nun gewählten Server und Service unter allen
+gefundenen direkt addressiert. Nach erhalt des PADR beginnt der Server mit dem Aufbau
+einer PPP Session und bestätigt dies mit einem PPPoE Active Discovery Session-confirmation (PADS) Paket.
+Diese enthält auch eine Session-ID welche die folgende Session eindeutig Identifiziert.
 \subsubsection{Session}
-tbd
+In der Sitzungsphase erfolgt die weitere Konfiguration der Verbindung, die Authentifikation des
+Clients sowie der eigentliche Datenaustausch. Dieser ist im gegensatz zur Discovery und Terminate
+Phase PPP spezifischim und im Abbildung \ref{} genauer dargestellt.
+%
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=0.5\textwidth]{img/pppoe_sequenz2.jpg}
+ \caption{PPP-Spezifischer Teil eines PPPoE-Verbindungsaufbaus (Entnommen aus \cite{pppoe_sequenz2})}
+ \label{fig:PPPoE_sequenz2}
+\end{figure}
+% 
 \subsubsection{Terminate}
-tbd
+Die PPPoE Verbindung kann jederzeit von beiden Kommunikationspartner beendet werden. Hierfür sendet
+der Client oder der Server ein PPPoE Active Discovery Terminate (PADT) Paket. Nach Erhalt dieses
+Pakets ist kein weiterer Datenaustausch über die Session erlaubt.
 %
 %
 \section{Conclusion} 
@@ -158,7 +199,11 @@ James F. Kurose / Keith W. Ross, Computernetzwerke, Pearson, 2012
 \bibitem{RFC3256} The DOCSIS (Data-Over-Cable Service Interface Specifications) Device Class DHCP (Dynamic Host Configuration Protocol) Relay Agent Information Sub-option (IETF RFC 3256), \newblock  D. Jones
 , \newblock The Internet Society, \newblock April, \newblock 2002.
 \bibitem{PPP-Bild} Veranschaulichung einer PPP-Verbindung, \newblock Vicomsoft, \newblock http://www.vicomsoft.com/learning-center/pppoe/
+\bibitem{cisconut} Cisco IOS in a Nutshell \newblock James Boney, \newblock O'Reilly Media \newblock 2005
+\bibitem{dslapp} Implementation and Applications of DSL Technology, \newblock Philip Golden Hervé Dedieu, \newblock Krista S. Jacobsen, \newblock 1998
 %\bibitem{RFC1055} http://tools.ietf.org/html/rfc1055
 %\bibitem{PPPoE_Bild} Aufbau eines PPPoE\-Pakets,\newblock H3C \newblock http://www.h3c.com/portal/Products___Solutions/Technology/WAN/Technology_White_Paper/200911/654415_57_0.htm
+%\bibitem{pppoe_sequenz1} Ablauf eine PPPoE-Verbindung,\newblock xxx \newblock http://
+%\bibitem{pppoe_sequenz2} PPP-Spezifischer Teil eines PPPoE-Verbindungsaufbaus,\newblock xxx \newblock http://
 \end{thebibliography} 
 \end{document} 

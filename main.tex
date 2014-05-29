@@ -189,7 +189,7 @@ Phase PPP-spezifisch und in Abbildung \ref{fig:PPPoEsequenz2} genauer dargestell
  \label{fig:PPPoEsequenz2}
 \end{figure}
 %
-TODO: Ablauf für PPP-Session beschreiben\\
+TODO: Ablauf für PPP-Session beschreiben.\\
 Hierbei wird zunächst ein Link Establishment über das Link Control Protocol (LCP) durchgeführt.
 Daraufhin erfolgt eine optionale Authentifikation entweder über das Password Authentication Protocol (PAP)
 oder dem Challenge-Handshake Authentication Protocol (CHAP). Bei einem DSL-Anschluss entspricht dies
@@ -197,7 +197,15 @@ dem Nachweis der Kenntnis der vom ISP mitgeteilten Anschlussdaten. Es erfolgt di
 Netzwerk-Adresse über das Network Control Protocol (NCP) und im Anschluss der Austausch der
 eigentlichen Nutzdaten. Die Verbindung kann nun jederzeit terminiert werden, z.B.
 aufgrund von Inaktivität oder einem Session-Timeout.
-% 
+%
+%
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=0.5\textwidth]{img/ppp_linkstates.png}
+ \caption{Phasen der PPP-Session (Entnommen aus \cite{pppoesequenz2})}
+ \label{fig:PPPoEsequenz2}
+\end{figure}
+%
 %
 \subsubsection{Terminate}
 Die PPPoE Verbindung kann jederzeit von beiden Kommunikationspartner beendet werden. Hierfür sendet

@@ -84,13 +84,15 @@ Der Payload beinhaltet die eigentlichen Daten, also Pakete anderer Protokolle. S
 %TODO Beispielwerte für Protokolle?
 Nach dem Payload folgt eine Checksumme (CRC), die über die Felder Address, Control, Protokoll und den Payload berechnet wird. Das Feld der Checksumme ist standardmäßig 2 Byte groß, kann aber auch auf 4 Byte verhandelt werden (CRC32). Durch diese Checksumme können Übertragungsfehler effektiv entdeckt werden.
 
-\subsection{Unterprotokolle zur Verbindungssteuerung und Aushandeln von Optionen}
+\subsection{Unterprotokolle zur Verbindungssteuerung}
 \paragraph{Link Control Protocol}
 Das \textit{Link Control Protocol} (LCP) dient zum Aufbau, Konfiguration und Prüfung von PPP--Verbindungen. Zur Konfiguration dienen diverse Optionen, die in LCP--Paketen im Payload von PPP--Rahmen übertragen werden. Der initiierende Rechner schlägt Optionen vor, die vom Kommunikationspartner entweder angenommen oder komplett bzw. teilweise abgelehnt werden können. Mögliche Optionen sind u.\,a. die \textit{Maximum Receive Unit} (MRU), das Authentifizierungsprotokoll oder das Qualitätsprotokoll. Ersteres legt die maximale zu übermittelnde Paketgröße fest. Mögliche Authentifizierungsprotokolle sind z.\,B. das \textit{Password Authentication Protocol} (PAP) oder das \textit{Challenge Handshake Authentification Protocol} (CHAP). Über ein optionales Qualitätsprotokoll können Daten zur Verbindungssqualität ausgetauscht werden. Daneben gibt es noch eine vielzahl weiterer Optionen, die sich z.\,B. um Komprimierung, Nummerierung oder Identifikation kümmern (LCP Erweiterungen).
 \paragraph{Network Control Protocol}
 Das \textit{Network Control Protocol} (NCP) enthält verschiedene Protokolle zur Aushandlung von Ende--zu--Ende Verbindungsoptionen der Teilnehmer. Am weitesten verbreitet ist dabei das \textit{Internet Protocol Control Protocol} (IPCP) für IPv4. Hierüber können Optionen wie IP--Adresse, Gateway, DNS--Server und Kompression ausgehandelt werden. Damit ist IPCP über Wählverbindungen in seiner Funktion ähnlich dem \textit{Dynamic Host Control Protocol} (DHCP) in Ethernet--Netzwerken.
 Neben IPCP gibt es weitere NPCs für andere Protokolle der Vermittlungsschicht beispielsweise IPV6CP für IPv6, IPXCP für IPX oder ATCP für Appletalk.
 
+\subsection{Aushandeln von Optionen?}
+TODO
 
 \section{Kommunikationsabläufe}
 Das PPP eignet sich für die Übertragung über eine Vielzahl an Physical Layer Protokollen.

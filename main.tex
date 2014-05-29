@@ -47,40 +47,87 @@ Neben DSL-Anschl\"ussen gibt es in Deutschland die Alternative des Kabel-Anschlu
 \newline
 Sektion 2 behandelt die Funktionsweise von PPP zusammen mit dem Aufbau des PPP-Headers. Sektion 3 beschreibt einen Verbindungsaufbau am Beispiel einer PPPoE-Verbindung. In Sektion 4 ziehen wir ein Fazit zu den hier vorgestellten Fakten zu PPP.
 
-\section{Section Heading Here}
-\section{KommunikationsablÃ¤ufe}
-Das PPP eignet sich fÃ¼r die Ãœbertragung Ã¼ber eine Vielzahl an Physical Layer Protokollen.
-Hierzu zÃ¤hlen unter anderem  Synchronous Optical Network (SONET), GPRS-/UMTS oder auch
-in Verbindung mit Ethernet Ã¼ber die weit verbeitete PPPoE-Variante fÃ¼r die Ãœbertragung
-Ã¼ber Direct Subscriber Line (DSL) AnschlÃ¼sse\cite{IEEEhowto:kopka}.
+
+%Einleitung -> PPPoE, Anriss PPTP?
+
+\section{Aufbau von PPP}
+Das Point--to--Point--Protokoll befindet sich im OSI-Modell auf der Sicherungsschicht (Schicht 2, wie in Abbildung \ref{fig:osi} zu sehen) und beinhaltet Pakete der überliegenden Schichten.\\
+PPP besteht aus drei Kernfunktionen:
+
+\begin{enumerate}
+    \item Rahmenbildung inklusive Fehlererkennung
+    \item Verbindungssteuerung
+    \item Aushandeln von Optionen
+\end{enumerate}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=0.3\textwidth]{img/ppplayers}
+ \caption{Eingliederung in OSI/TCP-Modell (Entnommen von \cite{ppposi})}
+ \label{fig:osi}
+\end{figure}
+
+\subsection{Rahmenbildung}
+Die Rahmenbildungsmethode von PPP kennzeichnet das Ende und den Anfang des nächsten Rahmens eindeutig und kann Fehler erkennen. Es ist ähnlich dem \textit{High-Level Data Link Control} (HDLC) Protokoll aufgebaut, ist statt diesem aber nicht bit- sondern byteorientiert. Dies bedeutet, dass immer eine gerade Anzahl von Bytes verwendet wird. Obwohl PPP auch zuverlässige Übertragungen bieten kann wird meist ein unnummerierter, also unbestätigter Datentransfer genutzt.
+
+% bisschen klein, evtl größer neu machen
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=0.5\textwidth]{img/ppprahmen}
+ \caption{PPP-Rahmen im unnummerierten Modus (Entnommen aus \cite{compnetzw})}
+ \label{fig:ppprahmen}
+\end{figure}
+
+Im Folgenden wird der detaillierte Aufbau eines PPP--Rahmens erläutert (siehe Abbildung \ref{fig:ppprahmen}).\\
+Das 1. Byte stellt dabei das sogenannte \textit{Flagbyte} dar, welches den Anfang und das Ende des Rahmens kennzeichnet und immer aus den Bits \texttt{01111110} (hexadezimal \texttt{0x7E}) besteht. Sollte im Payload die selbe Bitfolge vorkommen, wird diese vor dem Versand ''escaped'', also markiert und umgewandelt (auch Bytestopfen genannt). Hierfür wird diesem Byte ein weiteres Escapebyte vorangestellt (\texttt{0x7D}) und anschließend das Eigentliche mit \texttt{0x20} XOR-verknüpft. Somit wird aus dem Flagbyte im Payload \texttt{0x7D 0x5E}. Mithilfe des Escaping kann einfach nach Anfang und Ende des Rahmens gesucht werden. Beim Auslesen wird nach dem Flagbyte \texttt{0x7D} gesucht, selbiges bei Fund gelöscht und das nachfolgende wieder mit \texttt{0x20} XOR--verknüpft. Zwischen zwei Rahmen wird nur ein Flagbyte benötigt um beide abzugrenzen.\\
+Das 2. Byte ist das \textit{Addressbyte}, das immer auf \texttt{11111111} gesetzt ist um an allen Stationen durchgelassen zu werden. Ähnlich einem IP--Broadcast muss somit keine spezifische Adresse zugewiesen werden.\\
+Nach dem \textit{Addressbyte} folgt das \textit{Controlbyte}, welches immer mit \texttt{00000011} gesetzt ist, um anzugeben, dass der Rahmen unnummeriert ist. Bei schlechten Verbindungen mit Verlusten, wie z.\,B. drahtlose Netzwerke sollte die Rahmennummerierung aktiviert werden. Da \textit{Addressbyte} und \textit{Controlbyte} meist konstant sind, können Teilnehmer aushandeln die beiden Bytes nicht zu nutzen, letztlich also den Overhead der Rahmen zu vermindern.\\
+Das folgende Feld bezeichnet das Protokoll des sich im Payload befindenden Paket. Bitfolgen die mit einer 1 beginnen (ab \texttt{0x8000}), werden für PPP--Verbindungsprotokolle verwendet (z.\,B. LCP, NCP). Bitfolgen beginnend mit einer 0 bezeichnen Protokolle der Vermittlungsschicht (Schicht 3): IPv4/IPv6, aber auch z.\,B. IPX oder Appletalk. Das Feld ist standardmäßig 2 Byte groß, kann aber per LCP auch auf 1 Byte heruntergesetzt werden.\\
+Der Payload beinhaltet die eigentlichen Daten, also Pakete anderer Protokolle. Seine Länge beträgt standardmäßig 1500~Byte, kann aber auch per LCP auf eine andere Größe vereinbart werden. Sind die zu übertragenen Daten kleiner als die definierte Payload--Größe, so kann mittels Padding aufgefüllt werden.
+%TODO Beispielwerte für Protokolle?
+Nach dem Payload folgt eine Checksumme (CRC), die über die Felder Address, Control, Protokoll und den Payload berechnet wird. Das Feld der Checksumme ist standardmäßig 2 Byte groß, kann aber auch auf 4 Byte verhandelt werden (CRC32). Durch diese Checksumme können Übertragungsfehler effektiv entdeckt werden.
+
+\subsection{Unterprotokolle zur Verbindungssteuerung und Aushandeln von Optionen}
+\paragraph{Link Control Protocol}
+Das \textit{Link Control Protocol} (LCP) dient zum Aufbau, Konfiguration und Prüfung von PPP--Verbindungen. Zur Konfiguration dienen diverse Optionen, die in LCP--Paketen im Payload von PPP--Rahmen übertragen werden. Der initiierende Rechner schlägt Optionen vor, die vom Kommunikationspartner entweder angenommen oder komplett bzw. teilweise abgelehnt werden können. Mögliche Optionen sind u.\,a. die \textit{Maximum Receive Unit} (MRU), das Authentifizierungsprotokoll oder das Qualitätsprotokoll. Ersteres legt die maximale zu übermittelnde Paketgröße fest. Mögliche Authentifizierungsprotokolle sind z.\,B. das \textit{Password Authentication Protocol} (PAP) oder das \textit{Challenge Handshake Authentification Protocol} (CHAP). Über ein optionales Qualitätsprotokoll können Daten zur Verbindungssqualität ausgetauscht werden. Daneben gibt es noch eine vielzahl weiterer Optionen, die sich z.\,B. um Komprimierung, Nummerierung oder Identifikation kümmern (LCP Erweiterungen).
+\paragraph{Network Control Protocol}
+Das \textit{Network Control Protocol} (NCP) enthält verschiedene Protokolle zur Aushandlung von Ende--zu--Ende Verbindungsoptionen der Teilnehmer. Am weitesten verbreitet ist dabei das \textit{Internet Protocol Control Protocol} (IPCP) für IPv4. Hierüber können Optionen wie IP--Adresse, Gateway, DNS--Server und Kompression ausgehandelt werden. Damit ist IPCP über Wählverbindungen in seiner Funktion ähnlich dem \textit{Dynamic Host Control Protocol} (DHCP) in Ethernet--Netzwerken.
+Neben IPCP gibt es weitere NPCs für andere Protokolle der Vermittlungsschicht beispielsweise IPV6CP für IPv6, IPXCP für IPX oder ATCP für Appletalk.
+
+
+\section{Kommunikationsabläufe}
+Das PPP eignet sich für die Übertragung über eine Vielzahl an Physical Layer Protokollen.
+Hierzu zählen unter anderem  Synchronous Optical Network (SONET), GPRS-/UMTS oder auch
+in Verbindung mit Ethernet über die weit verbeitete PPPoE-Variante für die Übertragung
+über Direct Subscriber Line (DSL) Anschlüsse\cite{IEEEhowto:kopka}.
 An dieser Stelle wird exemplarisch der Kommunikationsablauf anhand von PPPoE aufgezeigt.
 \subsection{PPP over Ethernet}
-Das PPPoE Protokoll ist in RFC 2516 spezifiziert und wurde ursprÃ¼nglich
-von den Firmen UUNET, Redback Networks und Router Waree entwickelt \cite{RFC2516}.
-PPPoE ermÃ¶glicht die Ãœbertragung von PPP-Paketen auf Basis von Ethernet, wodurch
+Das PPPoE Protokoll ist in RFC 2516 spezifiziert und wurde ursprünglich
+von den Firmen UUNET Technologies, Redback Networks und RouterWare entwickelt \cite{RFC2516}.
+PPPoE ermöglicht die Übertragung von PPP-Paketen auf Basis von Ethernet, wodurch
 die Authentifizierungsfunktionen von PPP mit den
-simultanen ZugriffsmÃ¶glichkeiten des Ethernet kombiniert werden.
-Die Notwendigkeit fÃ¼r PPPoE resultierte aus dem Anfang dieses Jahrtausends
+simultanen Zugriffsmöglichkeiten des Ethernet kombiniert werden.
+Die Notwendigkeit für PPPoE resultierte aus dem Anfang dieses Jahrtausends
 einhergehenden Einzugs der DSL-Technologie und der notwendigen Umstrukturierung
-der benÃ¶tigten Software und Hardware. Ziel war es, ein Protokoll zu entwickeln,
-welches die bis dahin vorherrschende Einwahl-Verfahren mÃ¶glichst kostengÃ¼nstig
-ersetzt. Mit PPPoE war es einerseits mÃ¶glich die bis dahin bestehenden Software-Stacks fÃ¼r PPP
-mit minimalen Anpassungen weiter zu verwenden und lieÃŸ sich andererseits mit einfacher
-und damit gÃ¼nstiger Hardware umsetzen\cite{dslapp}.
-Eines der Haupteinsatzgebiete von PPPoE sind somit BreitbandzugÃ¤nge Ã¼ber DSL-AnschlÃ¼sse,
-Wireless-ZugÃ¤ngen oder Kabelmodems und wird
+der benötigten Software und Hardware. Ziel war es, ein Protokoll zu entwickeln,
+welches die bis dahin vorherrschende Einwahl-Verfahren möglichst kostengünstig
+ersetzt. Mit PPPoE war es einerseits möglich die bis dahin bestehenden Software-Stacks für PPP
+mit minimalen Anpassungen weiter zu verwenden und ließ sich andererseits mit einfacher
+und damit günstiger Hardware umsetzen\cite{dslapp}.
+Eines der Haupteinsatzgebiete von PPPoE sind somit Breitbandzugänge über DSL-Anschlüsse,
+Wireless-Zugängen oder Kabelmodems und wird
 auch von vielen Internet Service Providern (ISP) zu diesem Zweck eingesetzt \cite[p.88]{cisconut}.\\
 %
 Der strukturelle Aufbau eines typischen PPPoE-Pakets ist in Abbildung \ref{fig:PPPoE_Bild} zu sehen.
 \begin{figure}[h!]
  \centering
   \includegraphics[width=0.5\textwidth]{img/pppoe_aufbau.jpg}
- \caption{Aufbau eines PPPoE-Pakets (Entnommen aus \cite{PPPoEBild})}
+ \caption{Aufbau eines PPPoE-Pakets (Entnommen von \cite{PPPoEBild})}
  \label{fig:PPPoE_Bild}
 \end{figure}
 Hierbei ist die Verschachtelung der Protokolle der einzelnen Layer zu erkennen: Die unterste
 Ebene bildet Ethernet, gefolgt von PPPoE zur PPP bis zum Internet Protokoll.
-Der Aufbau von Ethernet und IP-Paketen wird als bekannt vorausgesetzt und hier nicht nÃ¤her erlÃ¤utert.\\
+Der Aufbau von Ethernet und IP-Paketen wird als bekannt vorausgesetzt und hier nicht näher erläutert.\\
 %
 Die Bedeutung der PPPoE header ist in Tabelle \ref{tab:PPPoE_fields} dargestellt.
 %
@@ -96,17 +143,17 @@ Code & Typ des PPPoE\-Pakets: 0x00 = Sitzungsdaten; 0x09 = PADI; 0x07 = PADO ode
 \hline 
 Session\_ID & Eindeutiger identifier einer PPP\-Sitzung\\ 
 \hline 
-Length & LÃ¤nge des PPPoE\-Payloads\\ 
+Length & Länge des PPPoE\-Payloads\\ 
 \hline 
-Protocol & Protokolltyp des nÃ¤chsten Layers\\ 
+Protocol & Protokolltyp des nächsten Layers\\ 
 \hline
 \end{tabular}
 \end{figure}
-% TODO: scheiÃŸ label fÃ¼r Tabelle???
+% TODO: scheiß label für Tabelle???
 \label{tab:PPPoE_fields}
 %
 Der Ablauf einer PPPoE-Verbindung teilt sich in die drei Phasen Discovery, Session und Terminate
-ein. Diese werden in Abbildung \ref{fig:PPPoEsequenz1} in den folgenden Abschnitten nÃ¤her erlÃ¤utert (vgl. \cite{RFC2516}).\\
+ein. Diese werden in Abbildung \ref{fig:PPPoEsequenz1} in den folgenden Abschnitten näher erläutert (vgl. \cite{RFC2516}).\\
 %
 \begin{figure}[h!]
  \centering
@@ -117,19 +164,19 @@ ein. Diese werden in Abbildung \ref{fig:PPPoEsequenz1} in den folgenden Abschnit
 \subsubsection{Discovery}
 Das Ziel dieser Phase ist das Auffinden der MAC-Adresse des Servers (auch Concentrator genannt)
 sowie das Ableiten einer PPPoE Session-ID durch den Client (auch Host genannt).
-AbhÃ¤ngig von der Topologie kÃ¶nnen sich mehrere Server im Netzwerk befinden, welche in
+Abhängig von der Topologie können sich mehrere Server im Netzwerk befinden, welche in
 dieser Phase durch den Client entdeckt werden. Die Discovery-Phase selbst ist zustandslos, d.h.
 auf Seiten aller Kommunikationen werden keine Verbindungsinformationen gespeichert.\\
 Das erste gesendete PPPoE Active Discovery Initiation (PADI) Paket stellt ein Broadcast
-an alle im Netzwerk vorhanden Server dar. Dieses enthÃ¤lt den Namen des vom Client
+an alle im Netzwerk vorhanden Server dar. Dieses enthält den Namen des vom Client
 angefragten Service, auf welches Server mit einem
 PPPoE Active Discovery Offer (PADO) Paket antworten. Das Antwortpaket
-hat als Zieladresse die des Clients und enthÃ¤lt neben dem Namen des Servers optional
+hat als Zieladresse die des Clients und enthält neben dem Namen des Servers optional
 weitere vom Server angebotene Service-Namen. Es folgt ein PPPoE Active Discovery Request (PADR) Paket
-mit welchem der Client den von ihm nun gewÃ¤hlten Server und Service unter allen
-gefundenen direkt addressiert. Nach Erhalt des PADR beginnt der Server mit dem Aufbau
-einer PPP Session und bestÃ¤tigt dies mit einem PPPoE Active Discovery Session-confirmation (PADS) Paket.
-Diese enthÃ¤lt auch eine Session-ID, welche die folgende Session eindeutig Identifiziert.
+mit welchem der Client den von ihm nun gewählten Server und Service unter allen
+gefundenen direkt adressiert. Nach Erhalt des PADR beginnt der Server mit dem Aufbau
+einer PPP Session und bestätigt dies mit einem PPPoE Active Discovery Session-confirmation (PADS) Paket.
+Diese enthält auch eine Session-ID, welche die folgende Session eindeutig Identifiziert.
 \subsubsection{Session}
 In der Sitzungsphase erfolgt die weitere Konfiguration der Verbindung, die Authentifikation des
 Clients sowie der eigentliche Datenaustausch. Dieser ist im Gegensatz zur Discovery und Terminate
@@ -143,9 +190,9 @@ Phase PPP-spezifisch und in Abbildung \ref{fig:PPPoEsequenz2} genauer dargestell
 \end{figure}
 % 
 \subsubsection{Terminate}
-Die PPPoE Verbindung kann jederzeit von beiden Kommunikationspartner beendet werden. HierfÃ¼r sendet
+Die PPPoE Verbindung kann jederzeit von beiden Kommunikationspartner beendet werden. Hierfür sendet
 der Client oder der Server ein PPPoE Active Discovery Terminate (PADT) Paket. Nach Erhalt dieses
-Pakets ist kein weiterer Datenaustausch Ã¼ber die Session erlaubt.
+Pakets ist kein weiterer Datenaustausch über die Session erlaubt.
 %
 
 
@@ -174,8 +221,8 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 Andrew S. Tanenbaum: Computer Networks, 5.th edition, Prentice Hall, 2011
 James F. Kurose / Keith W. Ross, Computernetzwerke, Pearson, 2012
 
-%RFC 1661 â€“ Point-to-Point Protocol (PPP) July 1994;
-%RFC 1662 â€“ Point-to-Point Protocol in HDLC-like Framing
+%RFC 1661 – Point-to-Point Protocol (PPP) July 1994;
+%RFC 1662 – Point-to-Point Protocol in HDLC-like Framing
 %RFC 1962, PPP Compression Control Protocol (CCP)
 %RFC 1963, PPP Serial Data transport Protocol
 %RFC 1990, The PPP Multilink Protocol (MP)
@@ -199,10 +246,12 @@ James F. Kurose / Keith W. Ross, Computernetzwerke, Pearson, 2012
 , \newblock The Internet Society, \newblock April, \newblock 2002.
 \bibitem{PPP-Bild} Veranschaulichung einer PPP-Verbindung, \newblock Vicomsoft, \newblock http://www.vicomsoft.com/learning-center/pppoe/
 \bibitem{cisconut} Cisco IOS in a Nutshell \newblock James Boney, \newblock O'Reilly Media \newblock 2005
-\bibitem{dslapp} Implementation and Applications of DSL Technology, \newblock Philip Golden HervÃ© Dedieu, \newblock Krista S. Jacobsen, \newblock 1998
+\bibitem{dslapp} Implementation and Applications of DSL Technology, \newblock Philip Golden Hervé Dedieu, \newblock Krista S. Jacobsen, \newblock 1998
 %\bibitem{RFC1055} http://tools.ietf.org/html/rfc1055
 \bibitem{PPPoEBild} Aufbau eines PPPoE-Pakets,\newblock H3C \newblock http://www.h3c.com/portal/Products\_\_\_Solutions/Technology/WAN/Technology\_White\_Paper/200911/654415\_57\_0.htm
 \bibitem{pppoesequenz1} Ablauf eine PPPoE-Verbindung,\newblock xxx \newblock http://
 \bibitem{pppoesequenz2} PPP-Spezifischer Teil eines PPPoE-Verbindungsaufbaus,\newblock xxx \newblock http://
+\bibitem{ppposi} Eingliederung von PPP im OSI--Modell,\newblock Abrufdatum: 29.05.2014, \newblock http://www.tcpipguide.com/free/
+\bibitem{compnetzw} Computernetzwerke, \newblock Andrew S. Tanenbaum,  \newblock Pearson Verlag, \newblock 5. Auflage, \newblock 2012.
 \end{thebibliography} 
 \end{document} 

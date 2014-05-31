@@ -17,7 +17,7 @@
 % - 6 pages including pictures and references
 % - Wikipedia is not an allowed reference
 % - And do not use pictures or examples that you can find in the exercises or the lecture.
-\documentclass[journal]{IEEEtran}
+\documentclass[journal,10pt]{IEEEtran}
 \usepackage[utf8x]{inputenc}
 \hyphenation{op-tical net-works semi-conduc-tor} 
 \usepackage[pdftex]{graphicx}
@@ -132,11 +132,11 @@ Der Aufbau von Ethernet und IP-Paketen wird als bekannt vorausgesetzt und hier n
 Die Bedeutung der PPPoE header ist in Tabelle \ref{tab:PPPoE_fields} dargestellt.
 %
 \begin{figure}[h!]
-\begin{tabular}{|l|p{6.5cm}|}
+\begin{tabular}{|l|p{6.2cm}|}
 \hline 
-Ver & Verwendete Version des PPPoE, immer 1\\ 
+Ver & Verwendete Version des PPPoE. Der Wert ist immer 1.\\ 
 \hline 
-Type & Verwendeter Typ des PPPoE, immer 1\\ 
+Type & Verwendeter Typ des PPPoE. Der Wert ist immer 1.\\ 
 \hline 
 Code & Typ des PPPoE\-Pakets: 0x00 = Sitzungsdaten; 0x09 = PADI; 0x07 = PADO oder PADT;
 0x19 = PADR; 0x65 indicates PADS\\ 
@@ -211,16 +211,14 @@ Die PPPoE Verbindung kann jederzeit von beiden Kommunikationspartner beendet wer
 der Client oder der Server ein PPPoE Active Discovery Terminate (PADT) Paket. Nach Erhalt dieses
 Pakets ist kein weiterer Datenaustausch über die Session erlaubt.
 %
-
-
+\section{Vor- und Nachteile} 
+%
+Ein P mehr als PP, und zwei mehr als P.
+%
 \section{Fazit} 
 Wie in der Einf\"uhrung erw\"ahnt, war das Point-to-Point Protocol notwendig, da die damals aktuellen Standards nicht alle mittlerweile ben\"otigten Anforderungen erf\"ullen konnten. Durch die einfache Handhabung der aufgebauten verbindung f\"ur Netzwerk-Schicht-Protokolle, ist vermutlich auch die grosse Verbreitung des Protokolls zu erkl\"aren. Bei fast allen M\"oglichkeiten eine Internetverbindung aufzubauen (sei es \"uber DSL oder im Mobilfunknetz) wird PPP als Einw\"ahlprotokoll genutzt. Zwar wird im Kabelnetz mittlerweile ein anderes Protokoll verwendet, doch durch die einfache Umsetzung des Point-to-Point Protokolls wird es wahrscheinlich noch einige Jahre der Standard beim Verbinden mit dem ISP sein.
 
 \appendices 
-\section*{Acknowledgment} 
-The authors would like to thank...deiner Mudda
-% Can use something like this to put references on a page 
-% by themselves when using endfloat and the captionsoff option. 
 \ifCLASSOPTIONcaptionsoff 
   \newpage 
 \fi

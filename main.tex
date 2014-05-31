@@ -17,7 +17,7 @@
 % - 6 pages including pictures and references
 % - Wikipedia is not an allowed reference
 % - And do not use pictures or examples that you can find in the exercises or the lecture.
-\documentclass[journal,10pt]{IEEEtran}
+\documentclass[journal,11pt]{IEEEtran}
 \usepackage[utf8x]{inputenc}
 \hyphenation{op-tical net-works semi-conduc-tor} 
 \usepackage[pdftex]{graphicx}
@@ -93,8 +93,8 @@ Das \textit{Link Control Protocol} (LCP) dient zum Aufbau, Konfiguration und Pr�
 \paragraph{Network Control Protocol}
 Das \textit{Network Control Protocol} (NCP) enthält verschiedene Protokolle zur Aushandlung von Ende--zu--Ende Verbindungsoptionen der Teilnehmer. Am weitesten verbreitet ist dabei das \textit{Internet Protocol Control Protocol} (IPCP) für IPv4. Hierüber können Optionen wie IP--Adresse, Gateway, DNS--Server und Kompression ausgehandelt werden. Damit ist IPCP über Wählverbindungen in seiner Funktion ähnlich dem \textit{Dynamic Host Control Protocol} (DHCP) in Ethernet--Netzwerken.
 Neben IPCP gibt es weitere NPCs für andere Protokolle der Vermittlungsschicht beispielsweise IPV6CP für IPv6, IPXCP für IPX oder ATCP für Appletalk.
-
-
+\\
+%
 \section{Kommunikationsabläufe}
 Das PPP eignet sich für die Übertragung über eine Vielzahl an Physical Layer Protokollen.
 Hierzu zählen unter anderem  Synchronous Optical Network (SONET), GPRS-/UMTS oder auch
@@ -127,9 +127,9 @@ Der strukturelle Aufbau eines typischen PPPoE-Pakets ist in Abbildung \ref{fig:P
 \end{figure}
 Hierbei ist die Verschachtelung der Protokolle der einzelnen Layer zu erkennen: Die unterste
 Ebene bildet Ethernet, gefolgt von PPPoE zur PPP bis zum Internet Protokoll.
-Der Aufbau von Ethernet und IP-Paketen wird als bekannt vorausgesetzt und hier nicht näher erläutert.\\
-%
+Der Aufbau von Ethernet und IP-Paketen wird als bekannt vorausgesetzt und hier nicht näher erläutert.
 Die Bedeutung der PPPoE header ist in Tabelle \ref{tab:PPPoE_fields} dargestellt.
+%
 %
 \begin{figure}[h!]
 \begin{tabular}{|l|p{6.2cm}|}
@@ -148,9 +148,9 @@ Length & Länge des PPPoE\-Payloads\\
 Protocol & Protokolltyp des nächsten Layers\\ 
 \hline
 \end{tabular}
-\end{figure}
-% TODO: scheiß label für Tabelle???
+\caption{Bedeutung der PPPoE header}
 \label{tab:PPPoE_fields}
+\end{figure}
 %
 Der Ablauf einer PPPoE-Verbindung teilt sich in die drei Phasen Discovery, Session und Terminate
 ein. Diese werden in Abbildung \ref{fig:pppoe_h3c_sequenz} in den folgenden Abschnitten näher erläutert (vgl. \cite{RFC2516}).\\
@@ -161,6 +161,8 @@ ein. Diese werden in Abbildung \ref{fig:pppoe_h3c_sequenz} in den folgenden Absc
  \caption{Ablauf einer PPPoE-Session (Entnommen aus \cite{pppoe_h3c})}
  \label{fig:pppoe_h3c_sequenz}
 \end{figure}
+%
+\\
 \subsubsection{Discovery}
 Das Ziel dieser Phase ist das Auffinden der MAC-Adresse des Servers (auch Concentrator genannt)
 sowie das Ableiten einer PPPoE Session-ID durch den Client (auch Host genannt).
@@ -176,7 +178,8 @@ weitere vom Server angebotene Service-Namen. Es folgt ein PPPoE Active Discovery
 mit welchem der Client den von ihm nun gewählten Server und Service unter allen
 gefundenen direkt adressiert. Nach Erhalt des PADR beginnt der Server mit dem Aufbau
 einer PPP Session und bestätigt dies mit einem PPPoE Active Discovery Session-confirmation (PADS) Paket.
-Diese enthält auch eine Session-ID, welche die folgende Session eindeutig Identifiziert.
+Diese enthält auch eine Session-ID, welche die folgende Session eindeutig Identifiziert.\\
+%
 \subsubsection{Session}
 In der Sitzungsphase erfolgt die weitere Konfiguration der Verbindung, die Authentifikation des
 Clients sowie der eigentliche Datenaustausch. Dieser ist im Gegensatz zur Discovery und Terminate
@@ -205,15 +208,17 @@ aufgrund von Inaktivität oder einem Session-Timeout.
  \label{fig:ppp_oracle_ablauf}
 \end{figure}
 %
-%
+\\
 \subsubsection{Terminate}
 Die PPPoE Verbindung kann jederzeit von beiden Kommunikationspartner beendet werden. Hierfür sendet
 der Client oder der Server ein PPPoE Active Discovery Terminate (PADT) Paket. Nach Erhalt dieses
 Pakets ist kein weiterer Datenaustausch über die Session erlaubt.
+\\
 %
 \section{Vor- und Nachteile} 
 %
 Ein P mehr als PP, und zwei mehr als P.
+\\
 %
 \section{Fazit} 
 Wie in der Einf\"uhrung erw\"ahnt, war das Point-to-Point Protocol notwendig, da die damals aktuellen Standards nicht alle mittlerweile ben\"otigten Anforderungen erf\"ullen konnten. Durch die einfache Handhabung der aufgebauten verbindung f\"ur Netzwerk-Schicht-Protokolle, ist vermutlich auch die grosse Verbreitung des Protokolls zu erkl\"aren. Bei fast allen M\"oglichkeiten eine Internetverbindung aufzubauen (sei es \"uber DSL oder im Mobilfunknetz) wird PPP als Einw\"ahlprotokoll genutzt. Zwar wird im Kabelnetz mittlerweile ein anderes Protokoll verwendet, doch durch die einfache Umsetzung des Point-to-Point Protokolls wird es wahrscheinlich noch einige Jahre der Standard beim Verbinden mit dem ISP sein.
@@ -257,7 +262,7 @@ James F. Kurose / Keith W. Ross, Computernetzwerke, Pearson, 2012
 \bibitem{dslapp} Implementation and Applications of DSL Technology, \newblock Philip Golden Hervé Dedieu, \newblock Krista S. Jacobsen, \newblock 1998
 %\bibitem{RFC1055} http://tools.ietf.org/html/rfc1055
 % PPPoE Struktur, Verbindungsablauf
-\bibitem{pppoe_h3c} Aufbau eines PPPoE-Pakets,\newblock H3C \newblock http://www.h3c.com/portal/Products\_\_\_Solutions/Technology/WAN/Technology\_White\_Paper/200911/654415\_57\_0.htm
+\bibitem{pppoe_h3c} Aufbau eines PPPoE-Pakets,\newblock H3C \newblock http://www.h3c.com/portal/Products\_\_\_Solutions/Technology/\\WAN/Technology\_White\_Paper/200911/654415\_57\_0.htm
 % PPP Verbindungsablauf
 \bibitem{ppp_startnetworks} PPP-Spezifischer Teil eines PPPoE-Verbindungsaufbaus,\newblock Startnetworks \newblock http://www.startnetworks.info/2011/05/pppoe\-theory.html
 % PPP Verbindungsablauf (Detail)

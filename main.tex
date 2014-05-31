@@ -122,7 +122,7 @@ Der strukturelle Aufbau eines typischen PPPoE-Pakets ist in Abbildung \ref{fig:P
 \begin{figure}[h!]
  \centering
   \includegraphics[width=0.5\textwidth]{img/pppoe_aufbau.jpg}
- \caption{Aufbau eines PPPoE-Pakets (Entnommen von \cite{PPPoEBild})}
+ \caption{Aufbau eines PPPoE-Pakets (Entnommen von \cite{pppoe_h3c})}
  \label{fig:PPPoE_Bild}
 \end{figure}
 Hierbei ist die Verschachtelung der Protokolle der einzelnen Layer zu erkennen: Die unterste
@@ -153,13 +153,13 @@ Protocol & Protokolltyp des nächsten Layers\\
 \label{tab:PPPoE_fields}
 %
 Der Ablauf einer PPPoE-Verbindung teilt sich in die drei Phasen Discovery, Session und Terminate
-ein. Diese werden in Abbildung \ref{fig:PPPoEsequenz1} in den folgenden Abschnitten näher erläutert (vgl. \cite{RFC2516}).\\
+ein. Diese werden in Abbildung \ref{fig:pppoe_h3c_sequenz} in den folgenden Abschnitten näher erläutert (vgl. \cite{RFC2516}).\\
 %
 \begin{figure}[h!]
  \centering
   \includegraphics[width=0.5\textwidth]{img/pppoe_sequenz1.png}
- \caption{Ablauf einer PPPoE-Session (Entnommen aus \cite{PPPoEBild})}
- \label{fig:PPPoEsequenz1}
+ \caption{Ablauf einer PPPoE-Session (Entnommen aus \cite{pppoe_h3c})}
+ \label{fig:pppoe_h3c_sequenz}
 \end{figure}
 \subsubsection{Discovery}
 Das Ziel dieser Phase ist das Auffinden der MAC-Adresse des Servers (auch Concentrator genannt)
@@ -180,13 +180,13 @@ Diese enthält auch eine Session-ID, welche die folgende Session eindeutig Ident
 \subsubsection{Session}
 In der Sitzungsphase erfolgt die weitere Konfiguration der Verbindung, die Authentifikation des
 Clients sowie der eigentliche Datenaustausch. Dieser ist im Gegensatz zur Discovery und Terminate
-Phase PPP-spezifisch und in Abbildung \ref{fig:PPPoEsequenz2} genauer dargestellt.
+Phase PPP-spezifisch und in Abbildung \ref{fig:ppp_startnetworks} und \ref{ppp_oracle_ablauf} genauer dargestellt.
 %
 \begin{figure}[h!]
  \centering
   \includegraphics[width=0.5\textwidth]{img/pppoe_sequenz2.jpg}
- \caption{PPP-Spezifischer Teil eines PPPoE-Verbindungsaufbaus (Entnommen aus \cite{pppoesequenz2})}
- \label{fig:PPPoEsequenz2}
+ \caption{PPP-Spezifischer Teil eines PPPoE-Verbindungsaufbaus (Entnommen aus \cite{ppp_startnetworks})}
+ \label{fig:ppp_startnetworks}
 \end{figure}
 %
 TODO: Ablauf für PPP-Session beschreiben.\\
@@ -201,9 +201,9 @@ aufgrund von Inaktivität oder einem Session-Timeout.
 %
 \begin{figure}[h!]
  \centering
-  \includegraphics[width=0.5\textwidth]{img/ppp_linkstates.png}
- \caption{Phasen der PPP-Session (Entnommen aus \cite{pppoesequenz2})}
- \label{fig:PPPoEsequenz2}
+  \includegraphics[width=0.4\textwidth]{img/ppp_linkstates2.png}
+ \caption{Phasen der PPP-Session (Entnommen aus \cite{ppp_oracle})}
+ \label{fig:ppp_oracle_ablauf}
 \end{figure}
 %
 %
@@ -259,9 +259,12 @@ James F. Kurose / Keith W. Ross, Computernetzwerke, Pearson, 2012
 \bibitem{cisconut} Cisco IOS in a Nutshell \newblock James Boney, \newblock O'Reilly Media \newblock 2005
 \bibitem{dslapp} Implementation and Applications of DSL Technology, \newblock Philip Golden Hervé Dedieu, \newblock Krista S. Jacobsen, \newblock 1998
 %\bibitem{RFC1055} http://tools.ietf.org/html/rfc1055
-\bibitem{PPPoEBild} Aufbau eines PPPoE-Pakets,\newblock H3C \newblock http://www.h3c.com/portal/Products\_\_\_Solutions/Technology/WAN/Technology\_White\_Paper/200911/654415\_57\_0.htm
-\bibitem{pppoesequenz1} Ablauf eine PPPoE-Verbindung,\newblock xxx \newblock http://
-\bibitem{pppoesequenz2} PPP-Spezifischer Teil eines PPPoE-Verbindungsaufbaus,\newblock xxx \newblock http://
+% PPPoE Struktur, Verbindungsablauf
+\bibitem{pppoe_h3c} Aufbau eines PPPoE-Pakets,\newblock H3C \newblock http://www.h3c.com/portal/Products\_\_\_Solutions/Technology/WAN/Technology\_White\_Paper/200911/654415\_57\_0.htm
+% PPP Verbindungsablauf
+\bibitem{ppp_startnetworks} PPP-Spezifischer Teil eines PPPoE-Verbindungsaufbaus,\newblock Startnetworks \newblock http://www.startnetworks.info/2011/05/pppoe\-theory.html
+% PPP Verbindungsablauf (Detail)
+\bibitem{ppp_oracle} PPP-Spezifischer Teil eines PPPoE-Verbindungsaufbaus,\newblock Oracle \newblock http://docs.oracle.com/cd/E19096-01/sol.ppp301/805-4018/6j3qil163/index.html
 \bibitem{ppposi} Eingliederung von PPP im OSI--Modell,\newblock Abrufdatum: 29.05.2014, \newblock http://www.tcpipguide.com/free/
 \bibitem{compnetzw} Computernetzwerke, \newblock Andrew S. Tanenbaum,  \newblock Pearson Verlag, \newblock 5. Auflage, \newblock 2012.
 \end{thebibliography} 

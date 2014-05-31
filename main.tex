@@ -180,16 +180,15 @@ Diese enthält auch eine Session-ID, welche die folgende Session eindeutig Ident
 \subsubsection{Session}
 In der Sitzungsphase erfolgt die weitere Konfiguration der Verbindung, die Authentifikation des
 Clients sowie der eigentliche Datenaustausch. Dieser ist im Gegensatz zur Discovery und Terminate
-Phase PPP-spezifisch und in Abbildung \ref{fig:ppp_startnetworks} und \ref{ppp_oracle_ablauf} genauer dargestellt.
+Phase PPP-spezifisch und in Abbildung \ref{fig:ppp_startnetworks} und \ref{fig:ppp_oracle_ablauf} genauer dargestellt.
 %
 \begin{figure}[h!]
  \centering
-  \includegraphics[width=0.5\textwidth]{img/pppoe_sequenz2.jpg}
+  \includegraphics[width=0.35\textwidth]{img/pppoe_sequenz2.png}
  \caption{PPP-Spezifischer Teil eines PPPoE-Verbindungsaufbaus (Entnommen aus \cite{ppp_startnetworks})}
  \label{fig:ppp_startnetworks}
 \end{figure}
 %
-TODO: Ablauf für PPP-Session beschreiben.\\
 Hierbei wird zunächst ein Link Establishment über das Link Control Protocol (LCP) durchgeführt.
 Daraufhin erfolgt eine optionale Authentifikation entweder über das Password Authentication Protocol (PAP)
 oder dem Challenge-Handshake Authentication Protocol (CHAP). Bei einem DSL-Anschluss entspricht dies
@@ -201,7 +200,7 @@ aufgrund von Inaktivität oder einem Session-Timeout.
 %
 \begin{figure}[h!]
  \centering
-  \includegraphics[width=0.4\textwidth]{img/ppp_linkstates2.png}
+  \includegraphics[width=0.4\textwidth]{img/ppp_linkstates.png}
  \caption{Phasen der PPP-Session (Entnommen aus \cite{ppp_oracle})}
  \label{fig:ppp_oracle_ablauf}
 \end{figure}

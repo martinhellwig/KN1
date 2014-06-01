@@ -17,7 +17,7 @@
 % - 6 pages including pictures and references
 % - Wikipedia is not an allowed reference
 % - And do not use pictures or examples that you can find in the exercises or the lecture.
-\documentclass[journal,10pt]{IEEEtran}
+\documentclass[journal,11pt]{IEEEtran}
 \usepackage[utf8x]{inputenc}
 \hyphenation{op-tical net-works semi-conduc-tor} 
 \usepackage[pdftex]{graphicx}
@@ -45,7 +45,7 @@ In folgendem Bild (siehe Bild \ref{fig:PPP-Visualisierung}) wird gezeigt f\"ur w
 Neben DSL-Anschl\"ussen gibt es in Deutschland die Alternative des Kabel-Anschlusses. Bei Kabel-Anschl\"ussen wird nicht das PPP-Protokoll zum Aufbau einer Verbindung genutzt, sondern das DOCSIS-Protokoll zusammen mit einer DHCP-\"ahnlichen \cite{RFC3256} Funktionsweise. \\
 \\
 \newline
-Sektion 2 behandelt die Funktionsweise von PPP zusammen mit dem Aufbau des PPP-Headers. Sektion 3 beschreibt einen Verbindungsaufbau am Beispiel einer PPPoE-Verbindung. In Sektion 4 ziehen wir ein Fazit zu den hier vorgestellten Fakten zu PPP.
+Sektion 2 behandelt die Funktionsweise von PPP zusammen mit dem Aufbau des PPP-Headers. Sektion 3 beschreibt einen Verbindungsaufbau am Beispiel einer PPPoE-Verbindung. In Sektion 4 werden Vor- und Nachteile zwischen PPP und dem \"alteren SLIP aufgezeigt. Zuletzt ziehen wir in Sektion 5 ein Fazit zu den hier vorgestellten Fakten zu PPP.
 
 
 %Einleitung -> PPPoE, Anriss PPTP?
@@ -217,29 +217,29 @@ Pakets ist kein weiterer Datenaustausch über die Session erlaubt.
 %
 \section{Vor- und Nachteile} 
 %
-Dass PPP entstand ursprünglich aus dem Serial Line Internet Protocol (SLIP).
+Das PPP entstand ursprünglich aus dem Serial Line Internet Protocol (SLIP).
 Eine Betrachtung der Unterschiede bzw. Neuerungen in PPP lässt somit eine
 Bewertung der Vor- und Nachteile zu (vgl. \cite{ppp_slip_uniwi}). Die Vorteile
 von PPP lassen sich zunächst wie folgt zusammenfassen:
 %
 \begin{itemize}
-\item[Mehrere Netzwerkprotokolle über einen Übertragungskanal] Das ältere SLIP-Protokoll unterstützt immer nur ein einziges Netzwerkprotokoll.
-\item[Fehlerkorrekturverfahren] Frames mit falschen Checksummen werden von PPP erneut vom Kommunikationspartner angefordert. Das ältere
+\item \textbf{Mehrere Netzwerkprotokolle über einen Übertragungskanal:} Das ältere SLIP-Protokoll unterstützt immer nur ein einziges Netzwerkprotokoll.
+\item \textbf{Fehlerkorrekturverfahren:} Frames mit falschen Checksummen werden von PPP erneut vom Kommunikationspartner angefordert. Das ältere
 	SLIP unterstützt kein Fehlerkorrekturverfahren, sondern delegiert die Fehlerbehandlung an andere Protokolle weiter. Dies bedeutet i.d.R. zusätzliche
 	Arbeitsschritte welche die Fehlerkorrektur und somit auch die Übertragung verlangsamen können.
-\item[Software-Flußkontrolle] Bei Aushanldung der Steuerzeichen über LCP kann PPP auch auf Datenübertragungseinrichtungen verwendet werden, die mit Software-Flußkontrolle (XON/XOFF) arbeiten - z.B. zwischen Modem und Computer. SLIP unterstützt dies nicht.
-\item[Vereinfachung der Authentifizierung] Bei identischem Authentisierungsverfahren beider Kommunikationspartner entfällt im allgemeinen die manuelle bzw. skriptgestützte Identifizierung beim Kommunikationspartner, was in vielen Fällen auch die Verwendung von Skripts überflüssig macht. SLIP unterstützt dies nicht.
-\item[Automatisches Aushandeln einer IP-Adresse] PPP - genauer IPCP - unterstützt von sich aus das automatische Aushandeln einer dynamisch zugewiesenen IP-Adresse im gegensatz zu SLIP.
-\item[Aushalndung der Kompression] Die Kommunikationspartner handeln mittels IPCP aus, ob Van-Jacobson-Header-Compression verwendet werden soll. Im Fall von SLIP muss der Kommunikationspartner wissen, ob das Verfahren unterstützt wird oder nicht und die Software entsprechend konfigurieren.
+\item \textbf{Software-Flußkontrolle:} Bei Aushanldung der Steuerzeichen über LCP kann PPP auch auf Datenübertragungseinrichtungen verwendet werden, die mit Software-Flußkontrolle (XON/XOFF) arbeiten - z.B. zwischen Modem und Computer. SLIP unterstützt dies nicht.
+\item \textbf{Vereinfachung der Authentifizierung:} Bei identischem Authentisierungsverfahren beider Kommunikationspartner entfällt im allgemeinen die manuelle bzw. skriptgestützte Identifizierung beim Kommunikationspartner, was in vielen Fällen auch die Verwendung von Skripts überflüssig macht. SLIP unterstützt dies nicht.
+\item \textbf{Automatisches Aushandeln einer IP-Adresse:} PPP - genauer IPCP - unterstützt von sich aus das automatische Aushandeln einer dynamisch zugewiesenen IP-Adresse im gegensatz zu SLIP.
+\item \textbf{Aushalndung der Kompression:} Die Kommunikationspartner handeln mittels IPCP aus, ob Van-Jacobson-Header-Compression verwendet werden soll. Im Fall von SLIP muss der Kommunikationspartner wissen, ob das Verfahren unterstützt wird oder nicht und die Software entsprechend konfigurieren.
 \end{itemize}
 %
 Neben den Vorteilen existieren allerdings auch die folgenden Nachteile:
 %
 \begin{itemize}
-\item[Verzögerung der Konfiguration] Eine Aushandlung der Einstellungen durch das LCP und das darauffolgende Aushandeln der Einstellungen durch die verschiedenen NCPs kann einige Sekunden in Anspruch nehmen. Bei SLIP kommt es zu keiner Verzögerung.
-\item[Daten overhead] PPP-Frames zur Übertragung von Netzwerkprotokoll-Daten enthalten zusätzlich zu den Daten standardmäßig 9 Bytes Steuer- und Kontrollinformation. Selbst unter Verwendung von Address-and-Control-Field-Compression und Protocol-Field-Compression womit Zusatzinformation somit auf 4 Bytes reduziert werden, sind das immer noch 3 Bytes mehr als bei der Verwendung von SLIP, das mit einem Byte an Zusatzinformation auskommt.
-\item[Zusätzliche Systemressourcen] Der komplizierte Aufbau von PPP bedingt wesentlich mehr Systemressourcen (Rechenzeit, Speicher) als SLIP, das mit einer sehr einfachen Frame-Struktur das Auslangen findet. Bei schnellen PPP-Verbindungen und unzureichend ausgestatteten Computern kann dies zu Einbußen bei der Arbeitsgeschwindigkeit führen.
-\item[Größere zu übertragende Datenmenge] Bei vielen mit LCP zu übertragenden Steuerzeichen, die vor der Übertragung umkodiert werden müssen, erhöht sich die zu übertragende Datenmenge, vorausgesetzt die zu übertragenden Datagramme enthalten viele solcher Steuerzeichen. Der Grund hierfür ist das jedes Steuerzeichen, das ursprünglich mit einem Byte dargestellt werden konnte, nach dem Umkodieren zwei Byte beansprucht. 
+\item \textbf{Verzögerung der Konfiguration:} Eine Aushandlung der Einstellungen durch das LCP und das darauffolgende Aushandeln der Einstellungen durch die verschiedenen NCPs kann einige Sekunden in Anspruch nehmen. Bei SLIP kommt es zu keiner Verzögerung.
+\item \textbf{Daten overhead:} PPP-Frames zur Übertragung von Netzwerkprotokoll-Daten enthalten zusätzlich zu den Daten standardmäßig 9 Bytes Steuer- und Kontrollinformation. Selbst unter Verwendung von Address-and-Control-Field-Compression und Protocol-Field-Compression womit Zusatzinformation somit auf 4 Bytes reduziert werden, sind das immer noch 3 Bytes mehr als bei der Verwendung von SLIP, das mit einem Byte an Zusatzinformation auskommt.
+\item \textbf{Zusätzliche Systemressourcen:} Der komplizierte Aufbau von PPP bedingt wesentlich mehr Systemressourcen (Rechenzeit, Speicher) als SLIP, das mit einer sehr einfachen Frame-Struktur das Auslangen findet. Bei schnellen PPP-Verbindungen und unzureichend ausgestatteten Computern kann dies zu Einbußen bei der Arbeitsgeschwindigkeit führen.
+\item \textbf{Größere zu übertragende Datenmenge:} Bei vielen mit LCP zu übertragenden Steuerzeichen, die vor der Übertragung umkodiert werden müssen, erhöht sich die zu übertragende Datenmenge, vorausgesetzt die zu übertragenden Datagramme enthalten viele solcher Steuerzeichen. Der Grund hierfür ist das jedes Steuerzeichen, das ursprünglich mit einem Byte dargestellt werden konnte, nach dem Umkodieren zwei Byte beansprucht. 
 \end{itemize}
 %
 \section{Fazit} 

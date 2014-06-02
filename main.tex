@@ -22,7 +22,8 @@
 \hyphenation{op-tical net-works semi-conduc-tor} 
 \usepackage[pdftex]{graphicx}
 \begin{document} 
-\title{Das Grundprinzip von PPP - \\wie es funktioniert, pros und cons} 
+%\title{Das Grundprinzip von PPP -- \\wie es funktioniert, Pros und Cons}
+\title{Eine Einführung in PPP -- \\wie es funktioniert, Pros und Cons}
 \author{\IEEEauthorblockN{Martin Hellwig, Michael Schulze, Michael Stahn}
 \IEEEauthorblockA{\\Kommunikationsnetze 1\\ Technische Universit\"at Darmstadt\\} }
 \maketitle 
@@ -30,29 +31,29 @@
 Diese Arbeit behandelt das Thema Point-to-Point Protocol (PPP). Dieses Protokoll wurde als Ersatz f\"ur fr\"uhere Einwahlprotokolle entwickelt. Heutzutage findet es seine Hauptanwendung beim Einw\"ahlen via DSL. Neben der technischen Umsetzung und Spezifikation wird in dieser Arbeit auch ein m\"oglicher Verbindugsaufbau via PPP gezeigt.
 \end{abstract} 
 \begin{IEEEkeywords} 
-PPP, PPPoE, PPPoA, Point-to-Point. 
+PPP, PPPoE, PPPoA, Point-to-Point.
 \end{IEEEkeywords}
 \section{Einleitung} 
-\IEEEPARstart{D}{as} Point-to-Point Protocol wurde urspr\"unglich im Jahr 1994 von W. Simpson entwickelt. Im OSI-Modell ist es zusammen mit anderen Protokollen in der DataLink-Schicht daf\"ur zust\"andig eine direkte Verbindung zwischen zwei Clients \"uber ein leitungsvermittelndes Netz herzustellen. F\"ur diesen Zweck werden auch M\"oglichkeiten der Authentifizierung spezifiziert \cite{RFC1661}. Ebenfalls besteht die M\"oglichkeit die Daten zu verschl\"usseln oder zu komprimieren. Die Protokolle der OSI-Netzwerk-Schicht k\"onnen dann die bestehende PPP-Verbindung zur \"Ubermittlung von Daten nutzen. Eine PPP-Verbindung (beispielsweise zwischen ISPs, Routern, Hosts oder Netzwerkbr\"ucken) ist eine Full-Duplex Verbindung und versucht die zu \"ubermittelnden Pakete in der richtigen Reihenfolge zu \"ubertragen.\\
-Die Notwendigkeit dieses Protokolls war zu dieser Zeit sehr hoch, da \"altere Standards, wie beispielsweise SLIP, nicht mehr zeitgem\"a\ss{} waren. Ebenfalls wurde der Telefon-Standard "Link Access Protocol, Balanced", welcher in der X.25-Protokollfamilie benutzt wurde, durch PPP ersetzt.  Speziell f\"ur die Internetverbindung f\"ur Heimanwender wurde f\"ur den alten ISDN-Standard ein Ersatz erschaffen. Eine Eigenschaft des Point-to-Point Protokolls ist es, f\"ur andere Protokolle der Netzwerk-Schicht leicht zu bedienen und zu nutzen zu sein. Mit den beiden Unter-Protokollen PPPoE (Point-to-Point over Ethernet)\cite{RFC2516} und PPPoA (Point-to-Point over ATM)\cite{RFC2364} kann man sich nun mithilfe eines Routers direkt mit dem Provider verbinden, was h\"ohere Datenraten zul\"asst. Dabei bleibt aber weiterhin der Vorteil (welcher zum Beispiel bei ISDN vorhanden ist), dass man zeitgebundene Tarife f\"ur die Endkunden anbieten und abrechnen kann. Bei heutigen DSL-Anschl\"ussen besitzt man zwar eine dauerhafte physikalische Verbindung zum Provider, doch erst mit dem Aufbau der PPP-Verbindung ist man auch virtuell mit dem Provider verbunden und kann somit das Internet nutzen. Nicht nur f\"ur heimische Internet-Anschl\"usse wird PPP genutzt, sondern in allen Netzwerkverbindungen, in welchen man sich erst einw\"ahlen muss. Dazu geh\"ort auch das Mobilfunktnetz oder auch die Einwahl \"uber eine ISDN-Verbindung.\\
-In folgendem Bild (siehe Bild \ref{fig:PPP-Visualisierung}) wird gezeigt f\"ur welchen Zweck das PPP-Protokoll bei DSL-Zug\"angen genutzt wird. Dabei stellt der heimische Router eine feste virtuelle Verbindung zu der Gegenstelle des Providers her, welche (aktuell in Deutschland so geregelt) im Normalfall alle 24 Stunden neu aufgebaut wird, da dann die Verbindung seitens des Anbieters automatisch getrennt wird. \\
+\IEEEPARstart{D}{as} Point-to-Point Protocol wurde urspr\"unglich im Jahr 1994 von W. Simpson entwickelt. Im OSI-Modell ist es zusammen mit anderen Protokollen in der Sicherungsschicht (engl. Data Link layer) daf\"ur zust\"andig eine direkte Verbindung zwischen zwei Clients \"uber ein leitungsvermittelndes Netz herzustellen. F\"ur diesen Zweck werden auch M\"oglichkeiten der Authentifizierung spezifiziert \cite{RFC1661}. Ebenfalls besteht die M\"oglichkeit die Daten zu verschl\"usseln oder zu komprimieren. Die Protokolle der OSI-Netzwerkschicht k\"onnen dann die bestehende PPP-Verbindung zur \"Ubermittlung von Daten nutzen. Eine PPP-Verbindung (beispielsweise zwischen Internet Service Providern, Routern, Hosts oder Netzwerkbr\"ucken) ist eine Full-Duplex Verbindung und versucht die zu \"ubermittelnden Pakete in der richtigen Reihenfolge zu \"ubertragen.\\
+Die Notwendigkeit dieses Protokolls war zu dieser Zeit sehr hoch, da \"altere Standards, wie beispielsweise SLIP, nicht mehr zeitgem\"a\ss{} waren. Ebenfalls wurde der Telefonstandard "Link Access Protocol, Balanced", welcher in der X.25-Protokollfamilie benutzt wurde, durch PPP ersetzt.  Speziell f\"ur die Internetverbindung f\"ur Heimanwender wurde f\"ur den alten ISDN-Standard ein Ersatz erschaffen. Eine Eigenschaft des Point-to-Point Protokolls ist es, f\"ur andere Protokolle der Netzwerkschicht leicht zu bedienen und zu nutzen zu sein. Mit den beiden Unterprotokollen PPPoE (Point-to-Point over Ethernet)\cite{RFC2516} und PPPoA (Point-to-Point over ATM)\cite{RFC2364} kann man sich nun mithilfe eines Routers direkt mit dem Provider verbinden, was h\"ohere Datenraten zul\"asst. Dabei bleibt aber weiterhin der Vorteil (welcher zum Beispiel bei ISDN vorhanden ist), dass man zeitgebundene Tarife f\"ur die Endkunden anbieten und abrechnen kann. Bei heutigen DSL-Anschl\"ussen besitzt man zwar eine dauerhafte physikalische Verbindung zum Provider, doch erst mit dem Aufbau der PPP-Verbindung ist man auch virtuell mit dem Provider verbunden und kann somit das Internet nutzen. Nicht nur f\"ur heimische Internet-Anschl\"usse wird PPP genutzt, sondern in allen Netzwerkverbindungen, in welchen man sich erst einw\"ahlen muss. Dazu geh\"ort auch das Mobilfunktnetz oder auch die Einwahl \"uber eine ISDN-Verbindung.\\
+In folgendem Bild (siehe Bild \ref{fig:PPP-Visualisierung}) wird gezeigt f\"ur welchen Zweck das PPP-Protokoll bei DSL-Zug\"angen genutzt wird. Dabei stellt der heimische Router eine dauerhafte virtuelle Verbindung zu der Gegenstelle des Providers her, welche (aktuell in Deutschland so geregelt) im Normalfall alle 24~Stunden neu aufgebaut wird, da dann die Verbindung seitens des Anbieters automatisch getrennt wird. \\
 \begin{figure}[h!]
  \centering
   \includegraphics[width=0.5\textwidth]{img/PPP-Visualisierung}
  \caption{Darstellung einer PPP-Verbindung zwischen Heimanwender und ISP (Entnommen aus \cite{PPP-Bild})}
  \label{fig:PPP-Visualisierung}
 \end{figure}
-Neben DSL-Anschl\"ussen gibt es in Deutschland die Alternative des Kabel-Anschlusses. Bei Kabel-Anschl\"ussen wird nicht das PPP-Protokoll zum Aufbau einer Verbindung genutzt, sondern das DOCSIS-Protokoll zusammen mit einer DHCP-\"ahnlichen \cite{RFC3256} Funktionsweise. \\
+Neben DSL-Anschl\"ussen gibt es in Deutschland die Alternative des Kabelanschlusses. Bei Kabelanschl\"ussen wird nicht das PPP-Protokoll zum Aufbau einer Verbindung genutzt, sondern das DOCSIS-Protokoll zusammen mit einer DHCP-\"ahnlichen \cite{RFC3256} Funktionsweise. \\
+Auch die weit verbreitete aber mittlerweile als unsicher geltende VPN-Lösung Point-to-Point Tunneling Protocol (PPTP) basiert auf PPP. Sie nutzt nachdem ein sicherer Tunnel erstellt wurde PPP zur Verbindung mit einem entfernten Netwerk. Dabei stellt PPP auch Sicherheitsfunktionen wie z.\,B. die Authentifizierung bereit.
 \\
 \newline
 Sektion 2 behandelt die Funktionsweise von PPP zusammen mit dem Aufbau des PPP-Headers. Sektion 3 beschreibt einen Verbindungsaufbau am Beispiel einer PPPoE-Verbindung. In Sektion 4 werden Vor- und Nachteile zwischen PPP und dem \"alteren SLIP aufgezeigt. Zuletzt ziehen wir in Sektion 5 ein Fazit zu den hier vorgestellten Fakten zu PPP.
 
 
-%Einleitung -> PPPoE, Anriss PPTP?
 
 \section{Aufbau von PPP}
-Das Point--to--Point--Protokoll befindet sich im OSI-Modell auf der Sicherungsschicht (Schicht 2, wie in Abbildung \ref{fig:osi} zu sehen) und beinhaltet Pakete der überliegenden Schichten.\\
-PPP besteht aus drei Kernfunktionen:
+Das Point-to-Point-Protokoll befindet sich im OSI-Modell auf der Sicherungsschicht (Schicht 2, wie in Abbildung \ref{fig:osi} zu sehen) und beinhaltet Pakete der überliegenden Schichten.\\
+PPP besteht aus folgenden drei Kernfunktionen:
 
 \begin{enumerate}
     \item Rahmenbildung inklusive Fehlererkennung
@@ -62,39 +63,38 @@ PPP besteht aus drei Kernfunktionen:
 
 \begin{figure}[h!]
  \centering
-  \includegraphics[width=0.3\textwidth]{img/ppplayers}
- \caption{Eingliederung in OSI/TCP-Modell (Entnommen von \cite{ppposi})}
+  \includegraphics[width=0.35\textwidth]{img/ppplayers}
+ \caption{Eingliederung im OSI/TCP-Modell (Entnommen von \cite{ppposi})}
  \label{fig:osi}
 \end{figure}
 
 \subsection{Rahmenbildung}
-Die Rahmenbildungsmethode von PPP kennzeichnet das Ende und den Anfang des nächsten Rahmens eindeutig und kann Fehler erkennen. Es ist ähnlich dem \textit{High-Level Data Link Control} (HDLC) Protokoll aufgebaut, ist statt diesem aber nicht Bit- sondern Byte-Orientiert. Dies bedeutet, dass immer eine gerade Anzahl von Bytes verwendet wird. Obwohl PPP auch zuverlässige Übertragungen bieten kann wird meist ein Nicht-Nummerierter, also unbestätigter Datentransfer genutzt.
+Die Rahmenbildungsmethode von PPP kennzeichnet eundeutig das Ende und den Anfang des nächsten Rahmens und kann Übertragungsfehler erkennen. Es ist ähnlich dem \textit{High-Level Data Link Control} (HDLC) Protokoll aufgebaut, ist statt diesem aber nicht bit- sondern byteorientiert. Dies bedeutet, dass immer eine gerade Anzahl von Bytes verwendet wird. Obwohl PPP auch zuverlässige Übertragungen bieten kann wird meist ein unnummerierter, also unbestätigter Datentransfer genutzt.
 
-% bisschen klein, evtl größer neu machen
 \begin{figure}[h!]
  \centering
   \includegraphics[width=0.5\textwidth]{img/ppprahmen}
- \caption{PPP-Rahmen im Nicht-Nummerierten Modus (Entnommen aus \cite{compnetzw})}
+ \caption{PPP-Rahmen im unnummerierten Modus (Entnommen aus \cite{compnetzw})}
  \label{fig:ppprahmen}
 \end{figure}
 
-Im Folgenden wird der detaillierte Aufbau eines PPP--Rahmens erläutert (siehe Abbildung \ref{fig:ppprahmen}).\\
-Das 1. Byte stellt dabei das sogenannte \textit{Flagbyte} dar, welches den Anfang und das Ende des Rahmens kennzeichnet und immer aus den Bits \texttt{01111110} (hexadezimal \texttt{0x7E}) besteht. Sollte im Payload die selbe Bitfolge vorkommen, wird diese vor dem Versand ``escaped'', also markiert und umgewandelt (auch Bytestopfen genannt). Hierfür wird diesem Byte ein weiteres Escapebyte vorangestellt (\texttt{0x7D}) und anschließend das Eigentliche mit \texttt{0x20} XOR-verknüpft. Somit wird aus dem Flagbyte im Payload \texttt{0x7D 0x5E}. Mithilfe des Escaping kann einfach nach Anfang und Ende des Rahmens gesucht werden. Beim Auslesen wird nach dem Flagbyte \texttt{0x7D} gesucht, selbiges bei Fund gelöscht und das nachfolgende wieder mit \texttt{0x20} XOR--verknüpft. Zwischen zwei Rahmen wird nur ein Flagbyte benötigt um beide abzugrenzen.\\
-Das 2. Byte ist das \textit{Addressbyte}, das immer auf \texttt{11111111} gesetzt ist um an allen Stationen durchgelassen zu werden. Ähnlich einem IP--Broadcast muss somit keine spezifische Adresse zugewiesen werden.\\
+Im Folgenden wird der detaillierte Aufbau eines PPP-Rahmens erläutert (siehe Abbildung \ref{fig:ppprahmen}).\\
+Das 1. Byte stellt dabei das sogenannte \textit{Flagbyte} dar, welches den Anfang und das Ende des Rahmens kennzeichnet und immer aus den Bits \texttt{01111110} (hexadezimal \texttt{0x7E}) besteht. Sollte im Payload die selbe Bitfolge vorkommen, wird diese vor dem Versand ``escaped'', also markiert und umgewandelt (auch Bytestopfen genannt). Hierfür wird diesem Byte ein weiteres Escapebyte vorangestellt (\texttt{0x7D}) und anschließend das Eigentliche mit \texttt{0x20} XOR-verknüpft. Somit wird aus dem Flagbyte im Payload \texttt{0x7D 0x5E}. Mithilfe des Escaping kann einfach nach Anfang und Ende des Rahmens gesucht werden. Beim Auslesen wird nach dem Flagbyte \texttt{0x7D} gesucht, selbiges bei Fund gelöscht und das nachfolgende wieder mit \texttt{0x20} XOR-verknüpft. Zwischen zwei Rahmen wird nur ein Flagbyte benötigt um beide abzugrenzen.\\
+Das 2. Byte ist das \textit{Addressbyte}, das immer auf \texttt{11111111} gesetzt ist um an allen Stationen durchgelassen zu werden. Ähnlich einem IP-Broadcast muss somit keine spezifische Adresse zugewiesen werden.\\
 Nach dem \textit{Addressbyte} folgt das \textit{Controlbyte}, welches immer mit \texttt{00000011} gesetzt ist, um anzugeben, dass der Rahmen unnummeriert ist. Bei schlechten Verbindungen mit Verlusten, wie z.\,B. drahtlose Netzwerke sollte die Rahmennummerierung aktiviert werden. Da \textit{Addressbyte} und \textit{Controlbyte} meist konstant sind, können Teilnehmer aushandeln die beiden Bytes nicht zu nutzen, letztlich also den Overhead der Rahmen zu vermindern.\\
-Das folgende Feld bezeichnet das Protokoll des sich im Payload befindenden Paket. Bitfolgen die mit einer 1 beginnen (ab \texttt{0x8000}), werden für PPP--Verbindungsprotokolle verwendet (z.\,B. LCP, NCP). Bitfolgen beginnend mit einer 0 bezeichnen Protokolle der Vermittlungsschicht (Schicht 3): IPv4/IPv6, aber auch z.\,B. IPX oder Appletalk. Das Feld ist standardmäßig 2 Byte groß, kann aber per LCP auch auf 1 Byte heruntergesetzt werden.\\
-Der Payload beinhaltet die eigentlichen Daten, also Pakete anderer Protokolle. Seine Länge beträgt standardmäßig 1500~Byte, kann aber auch per LCP auf eine andere Größe vereinbart werden. Sind die zu übertragenen Daten kleiner als die definierte Payload--Größe, so kann mittels Padding aufgefüllt werden.
+Das folgende Feld bezeichnet das Protokoll des sich im Payload befindenden Paket. Bitfolgen die mit einer 1 beginnen (ab \texttt{0x8000}), werden für PPP-Verbindungsprotokolle verwendet (z.\,B. LCP, NCP). Bitfolgen beginnend mit einer 0 bezeichnen Protokolle der Vermittlungsschicht (Schicht 3): IPv4/IPv6, aber auch z.\,B. IPX oder Appletalk. Das Feld ist standardmäßig 2 Byte groß, kann aber per LCP auch auf 1 Byte heruntergesetzt werden.\\
+Der Payload beinhaltet die eigentlichen Daten, also Pakete anderer Protokolle. Seine Länge beträgt standardmäßig 1500~Byte, kann aber auch per LCP auf eine andere Größe vereinbart werden. Sind die zu übertragenen Daten kleiner als die definierte Payload-Größe, so kann mittels Padding aufgefüllt werden.
 %TODO Beispielwerte für Protokolle?
 Nach dem Payload folgt eine Checksumme (CRC), die über die Felder Address, Control, Protokoll und den Payload berechnet wird. Das Feld der Checksumme ist standardmäßig 2 Byte groß, kann aber auch auf 4 Byte verhandelt werden (CRC32). Durch diese Checksumme können Übertragungsfehler effektiv entdeckt werden.
 
 \subsection{Unterprotokolle zur Verbindungssteuerung und Aushandeln von Optionen}
 \paragraph{Link Control Protocol}
-Das \textit{Link Control Protocol} (LCP) dient zum Aufbau, Konfiguration und Prüfung von PPP--Verbindungen. Zur Konfiguration dienen diverse Optionen, die in LCP--Paketen im Payload von PPP--Rahmen übertragen werden. Der initiierende Rechner schlägt Optionen vor, die vom Kommunikationspartner entweder angenommen oder komplett bzw. teilweise abgelehnt werden können. Mögliche Optionen sind u.\,a. die \textit{Maximum Receive Unit} (MRU), das Authentifizierungsprotokoll oder das Qualitätsprotokoll. Ersteres legt die maximale zu übermittelnde Paketgröße fest. Mögliche Authentifizierungsprotokolle sind z.\,B. das \textit{Password Authentication Protocol} (PAP) oder das \textit{Challenge Handshake Authentification Protocol} (CHAP). Über ein optionales Qualitätsprotokoll können Daten zur Verbindungsqualität ausgetauscht werden. Daneben gibt es noch eine Vielzahl weiterer Optionen, die sich z.\,B. um Komprimierung, Nummerierung oder Identifikation kümmern (LCP Erweiterungen).
+Das \textit{Link Control Protocol} (LCP) dient zum Aufbau, Konfiguration und Prüfung von PPP-Verbindungen. Zur Konfiguration dienen diverse Optionen, die in LCP-Paketen im Payload von PPP-Rahmen übertragen werden. Der initiierende Rechner schlägt Optionen vor, die vom Kommunikationspartner entweder angenommen oder komplett bzw. teilweise abgelehnt werden können. Mögliche Optionen sind u.\,a. die \textit{Maximum Receive Unit} (MRU), das Authentifizierungsprotokoll oder das Qualitätsprotokoll. Ersteres legt die maximale zu übermittelnde Paketgröße fest. Mögliche Authentifizierungsprotokolle sind z.\,B. das \textit{Password Authentication Protocol} (PAP) oder das \textit{Challenge Handshake Authentification Protocol} (CHAP). Über ein optionales Qualitätsprotokoll können Daten zur Verbindungsqualität ausgetauscht werden. Daneben gibt es noch eine Vielzahl weiterer Optionen, die sich z.\,B. um Komprimierung, Nummerierung oder Identifikation kümmern (LCP Erweiterungen).
 \paragraph{Network Control Protocol}
-Das \textit{Network Control Protocol} (NCP) enthält verschiedene Protokolle zur Aushandlung von Ende--zu--Ende Verbindungsoptionen der Teilnehmer. Am weitesten verbreitet ist dabei das \textit{Internet Protocol Control Protocol} (IPCP) für IPv4. Hierüber können Optionen wie IP--Adresse, Gateway, DNS--Server und Kompression ausgehandelt werden. Damit ist IPCP über Wählverbindungen in seiner Funktion ähnlich dem \textit{Dynamic Host Control Protocol} (DHCP) in Ethernet--Netzwerken.
+Das \textit{Network Control Protocol} (NCP) enthält verschiedene Protokolle zur Aushandlung von Ende-zu-Ende Verbindungsoptionen der Teilnehmer. Am weitesten verbreitet ist dabei das \textit{Internet Protocol Control Protocol} (IPCP) für IPv4. Hierüber können Optionen wie IP-Adresse, Gateway, DNS-Server und Kompression ausgehandelt werden. Damit ist IPCP über Wählverbindungen in seiner Funktion ähnlich dem \textit{Dynamic Host Control Protocol} (DHCP) in Ethernet-Netzwerken.
 Neben IPCP gibt es weitere NPCs für andere Protokolle der Vermittlungsschicht beispielsweise IPV6CP für IPv6, IPXCP für IPX oder ATCP für Appletalk.
-\\
-%
+
+
 \section{Kommunikationsabläufe}
 Das PPP eignet sich für die Übertragung über eine Vielzahl an Physical Layer Protokollen.
 Hierzu zählen unter anderem  Synchronous Optical Network (SONET), GPRS-/UMTS oder auch
@@ -110,7 +110,7 @@ simultanen Zugriffsmöglichkeiten des Ethernet kombiniert werden.
 Die Notwendigkeit für PPPoE resultierte aus dem Anfang dieses Jahrtausends
 einhergehenden Einzugs der DSL-Technologie und der notwendigen Umstrukturierung
 der benötigten Software und Hardware. Ziel war es, ein Protokoll zu entwickeln,
-welches die bis dahin vorherrschende Einwahl-Verfahren möglichst kostengünstig
+welches die bis dahin vorherrschende Einwahlverfahren möglichst kostengünstig
 ersetzt. Mit PPPoE war es einerseits möglich die bis dahin bestehenden Software-Stacks für PPP
 mit minimalen Anpassungen weiter zu verwenden und ließ sich andererseits mit einfacher
 und damit günstiger Hardware umsetzen\cite{dslapp}.
@@ -128,7 +128,7 @@ Der strukturelle Aufbau eines typischen PPPoE-Pakets ist in Abbildung \ref{fig:P
 Hierbei ist die Verschachtelung der Protokolle der einzelnen Layer zu erkennen: Die unterste
 Ebene bildet Ethernet, gefolgt von PPPoE zur PPP bis zum Internet Protokoll.
 Der Aufbau von Ethernet und IP-Paketen wird als bekannt vorausgesetzt und hier nicht näher erläutert.
-Die Bedeutung der PPPoE header ist in Tabelle \ref{tab:PPPoE_fields} dargestellt.
+Die Bedeutung der PPPoE-Header ist in Tabelle \ref{tab:PPPoE_fields} dargestellt.
 %
 %
 \begin{figure}[h!]
@@ -148,7 +148,7 @@ Length & Länge des PPPoE\-Payloads\\
 Protocol & Protokolltyp des nächsten Layers\\ 
 \hline
 \end{tabular}
-\caption{Bedeutung der PPPoE header}
+\caption{Bedeutung der PPPoE-Header}
 \label{tab:PPPoE_fields}
 \end{figure}
 %
@@ -192,11 +192,11 @@ Phase PPP-spezifisch und in Abbildung \ref{fig:ppp_startnetworks} und \ref{fig:p
  \label{fig:ppp_startnetworks}
 \end{figure}
 %
-Hierbei wird zunächst ein Link Establishment über das Link Control Protocol (LCP) durchgeführt.
+Hierbei wird zunächst ein Verbindungsaufbau über das Link Control Protocol (LCP) durchgeführt.
 Daraufhin erfolgt eine optionale Authentifikation entweder über das Password Authentication Protocol (PAP)
 oder dem Challenge-Handshake Authentication Protocol (CHAP). Bei einem DSL-Anschluss entspricht dies
 dem Nachweis der Kenntnis der vom ISP mitgeteilten Anschlussdaten. Es erfolgt die Zuweisung einer
-Netzwerk-Adresse über das Network Control Protocol (NCP) und im Anschluss der Austausch der
+Netzwerkadresse über das Network Control Protocol (NCP) und im Anschluss der Austausch der
 eigentlichen Nutzdaten. Die Verbindung kann nun jederzeit terminiert werden, z.B.
 aufgrund von Inaktivität oder einem Session-Timeout.
 %
@@ -210,7 +210,7 @@ aufgrund von Inaktivität oder einem Session-Timeout.
 %
 \\
 \subsubsection{Terminate}
-Die PPPoE Verbindung kann jederzeit von beiden Kommunikationspartner beendet werden. Hierfür sendet
+Die PPPoE Verbindung kann jederzeit von beiden Kommunikationspartnern beendet werden. Hierfür sendet
 der Client oder der Server ein PPPoE Active Discovery Terminate (PADT) Paket. Nach Erhalt dieses
 Pakets ist kein weiterer Datenaustausch über die Session erlaubt.
 \\
@@ -227,9 +227,9 @@ von PPP lassen sich zunächst wie folgt zusammenfassen:
 \item \textbf{Fehlerkorrekturverfahren:} Frames mit falschen Checksummen werden von PPP erneut vom Kommunikationspartner angefordert. Das ältere
 	SLIP unterstützt kein Fehlerkorrekturverfahren, sondern delegiert die Fehlerbehandlung an andere Protokolle weiter. Dies bedeutet i.d.R. zusätzliche
 	Arbeitsschritte welche die Fehlerkorrektur und somit auch die Übertragung verlangsamen können.
-\item \textbf{Software-Flußkontrolle:} Bei Aushanldung der Steuerzeichen über LCP kann PPP auch auf Datenübertragungseinrichtungen verwendet werden, die mit Software-Flußkontrolle (XON/XOFF) arbeiten - z.B. zwischen Modem und Computer. SLIP unterstützt dies nicht.
+\item \textbf{Software-Flußkontrolle:} Bei Aushandlung der Steuerzeichen über LCP kann PPP auch auf Datenübertragungseinrichtungen verwendet werden, die mit Software-Flußkontrolle (XON/XOFF) arbeiten -- z.B. zwischen Modem und Computer. SLIP unterstützt dies nicht.
 \item \textbf{Vereinfachung der Authentifizierung:} Bei identischem Authentisierungsverfahren beider Kommunikationspartner entfällt im allgemeinen die manuelle bzw. skriptgestützte Identifizierung beim Kommunikationspartner, was in vielen Fällen auch die Verwendung von Skripts überflüssig macht. SLIP unterstützt dies nicht.
-\item \textbf{Automatisches Aushandeln einer IP-Adresse:} PPP - genauer IPCP - unterstützt von sich aus das automatische Aushandeln einer dynamisch zugewiesenen IP-Adresse im gegensatz zu SLIP.
+\item \textbf{Automatisches Aushandeln einer IP-Adresse:} PPP -- genauer IPCP -- unterstützt von sich aus das automatische Aushandeln einer dynamisch zugewiesenen IP-Adresse im gegensatz zu SLIP.
 \item \textbf{Aushalndung der Kompression:} Die Kommunikationspartner handeln mittels IPCP aus, ob Van-Jacobson-Header-Compression verwendet werden soll. Im Fall von SLIP muss der Kommunikationspartner wissen, ob das Verfahren unterstützt wird oder nicht und die Software entsprechend konfigurieren.
 \end{itemize}
 %
@@ -237,18 +237,19 @@ Neben den Vorteilen existieren allerdings auch die folgenden Nachteile:
 %
 \begin{itemize}
 \item \textbf{Verzögerung der Konfiguration:} Eine Aushandlung der Einstellungen durch das LCP und das darauffolgende Aushandeln der Einstellungen durch die verschiedenen NCPs kann einige Sekunden in Anspruch nehmen. Bei SLIP kommt es zu keiner Verzögerung.
-\item \textbf{Daten overhead:} PPP-Frames zur Übertragung von Netzwerkprotokoll-Daten enthalten zusätzlich zu den Daten standardmäßig 9 Bytes Steuer- und Kontrollinformation. Selbst unter Verwendung von Address-and-Control-Field-Compression und Protocol-Field-Compression womit Zusatzinformation somit auf 4 Bytes reduziert werden, sind das immer noch 3 Bytes mehr als bei der Verwendung von SLIP, das mit einem Byte an Zusatzinformation auskommt.
+\item \textbf{Daten overhead:} PPP-Frames zur Übertragung von Netzwerkprotokolldaten enthalten zusätzlich zu den Daten standardmäßig 9 Bytes Steuer- und Kontrollinformation. Selbst unter Verwendung von Address-and-Control-Field-Compression und Protocol-Field-Compression womit Zusatzinformation somit auf 4 Bytes reduziert werden, sind das immer noch 3 Bytes mehr als bei der Verwendung von SLIP, das mit einem Byte an Zusatzinformation auskommt.
 \item \textbf{Zusätzliche Systemressourcen:} Der komplizierte Aufbau von PPP bedingt wesentlich mehr Systemressourcen (Rechenzeit, Speicher) als SLIP, das mit einer sehr einfachen Frame-Struktur das Auslangen findet. Bei schnellen PPP-Verbindungen und unzureichend ausgestatteten Computern kann dies zu Einbußen bei der Arbeitsgeschwindigkeit führen.
 \item \textbf{Größere zu übertragende Datenmenge:} Bei vielen mit LCP zu übertragenden Steuerzeichen, die vor der Übertragung umkodiert werden müssen, erhöht sich die zu übertragende Datenmenge, vorausgesetzt die zu übertragenden Datagramme enthalten viele solcher Steuerzeichen. Der Grund hierfür ist das jedes Steuerzeichen, das ursprünglich mit einem Byte dargestellt werden konnte, nach dem Umkodieren zwei Byte beansprucht. 
 \end{itemize}
 %
 \section{Fazit} 
-Wie in der Einf\"uhrung erw\"ahnt, war das Point-to-Point Protocol notwendig, da die damals aktuellen Standards nicht alle mittlerweile ben\"otigten Anforderungen erf\"ullen konnten. Durch die einfache Handhabung der aufgebauten verbindung f\"ur Netzwerk-Schicht-Protokolle, ist vermutlich auch die grosse Verbreitung des Protokolls zu erkl\"aren. Bei fast allen M\"oglichkeiten eine Internetverbindung aufzubauen (sei es \"uber DSL oder im Mobilfunknetz) wird PPP als Einw\"ahlprotokoll genutzt. Zwar wird im Kabelnetz mittlerweile ein anderes Protokoll verwendet, doch durch die einfache Umsetzung des Point-to-Point Protokolls wird es wahrscheinlich noch einige Jahre der Standard beim Verbinden mit dem ISP sein.
+Wie in der Einf\"uhrung erw\"ahnt, war das Point-to-Point Protocol notwendig, da die damals aktuellen Standards nicht alle mittlerweile ben\"otigten Anforderungen erf\"ullen konnten. Durch die einfache Handhabung der aufgebauten verbindung f\"ur Netzwerkschichtprotokolle, ist vermutlich auch die große Verbreitung des Protokolls zu erkl\"aren. Bei fast allen M\"oglichkeiten eine Internetverbindung aufzubauen (sei es \"uber DSL oder im Mobilfunknetz) wird PPP als Einw\"ahlprotokoll genutzt. Zwar wird im Kabelnetz mittlerweile ein anderes Protokoll verwendet, doch durch die einfache Umsetzung des Point-to-Point Protokolls wird es wahrscheinlich noch einige Jahre der Standard beim Verbinden mit dem ISP sein.
 
 \appendices 
 \ifCLASSOPTIONcaptionsoff 
   \newpage 
 \fi
+\newpage
 \begin{thebibliography}{1} 
 \bibitem{IEEEhowto:kopka} 
 H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus 

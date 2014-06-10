@@ -109,7 +109,6 @@ Sliding Window, Page 4, Format: Unaligned Text-Block starting at "Sending of fra
 10) Control Protocols, Page 4, Line 4: "a" is too much
 Sliding Window, Page 5, At the sender stored frames -> At the sender side...?
 Sliding Window: Go-back-N(Error Treatment), Page 5, ...is found faulty then protocol all the other -> sorry but I can't make a Reim on that
-Sliding Window: Go-back-N(Error Treatment), Page 5, ...is found faulty then protocol all the other -> sorry but I can't make a Reim on that
 Sliding Window: Go-back-N(Error Treatment), Page 5, ...protocol until-unless -> until or unless? please decide
 Sliding Window: Go-back-N(Error Treatment), Page 5, Optimization for this approach is to have -> One Optimization for..
 11) Control Protocols, Page 5, Line 1: "the" is too much

@@ -1,0 +1,94 @@
+Peer Review
+KN1 Bonus, SS 2014
+----------------------------
+
+About this Review:
+------------------
+* Reviewed report: Sliding Window
+* Number of Pages: 5
+
+
+Review:
+-------
+
+1. The Content
+
+1.a. Overall Rating:
+[ ] Very Good
+[x] Good
+[ ] Not Good
+[ ] Wrong
+If wrong, please justify:
+
+1.c. Technical Depth:
+[ ] Very High, Suitable Only for an Expert#
+[ ] High, Appropriate for the generally knowledgeable individual working in the field
+[x] Medium, Suitable for the non-specialist#
+[ ] Low, Superficial#
+
+1.d. Report Summary (indicate the main idea, contribution/solution, conclusions)(10 lines maximum, to be used by us only -not to be sent to authors-):
+They want to show how to deal with errors in communication. For this approach they presented a few possobilities to achhieve an error-free communication. As the last and best solution they show the Sliding-Windows-approach. For this purpose they used many pictures to visualize the proceed of the protocol. Short textes explain the pictures and the use of lower and upper bounds.
+
+1.e. Reviewer Confidence:
+[ ] High (i.e. have read and understand most/all of the bibliography)#
+[x] Medium (i.e. have partially read the bibliography, understands it partially)
+[ ] Low (i.e. don't feel sure about the review made -try not to select this!-)#
+
+1.f. Justification of your decision:
+We had this topic three times (NCS, KN2 and now in KN1). We think we know how Sliding Window works.
+
+2. About the Presentation of the Document
+
+2.a. Overall Organization of the report:
+[ ] Satisfactory
+[x] Could be Improved#
+[ ] Poor
+
+2.b. Title and Abstract:
+[x] Satisfactory
+[ ] Not Satisfactory
+Justification for "Not": 
+
+2.c. Appropriate report Length:
+[ ] Yes
+[x] No
+Justification for "No": Has only 5 sites, but wants to add some stuff to fill out the 6 sites
+
+2.d. Adequate Definition of Symbols, Terms, Concepts:
+[x] Yes
+[ ] Not always
+[ ] No
+Justification for "No": 
+
+2.e. Language:
+[ ] Satisfactory
+[x] Needs Improvement#
+[ ] Not Satisfactory
+
+
+2.f. Bibliography: 
+[ ] Satisfactory
+[x] Not Satisfactory
+Justification for "Not Satisfactory": Not available
+
+2.g. Plagiarism:
+[ ] No plagiarism found
+[x] Plagiarism found
+
+3. For the Improvement
+
+3.a. Detailed comments and suggestions for the authors to improve the report. Please number each comment (1., 2., 3. etc.). Use as many as required. If possible, indicate page, section and paragraph number. Consider restructurations, proper citation of sources, further elaboration of a particular section, typos, formatting, etc. Do *NOT* indicate what was plagiarised by the authors or where:
+1) Motivation, Line 4: "sought" should be "seen"
+2) Introduction, Page 2, Line 7: "the" can be discarded
+3) Introduction, Page 2, Line 14: "acknowledgement" should be plural
+4) Introduction, Page 2, Line 21: Double "in"
+5) Page 2: Control Protocols hat also Number 2, like Introduction
+6) Control Protocols, Page 3, Line 8: "isan" to "is an"
+7) Control Protocols, Page 3, Line 17: "terminal" to "time"
+8) Control Protocols, Page 3, Line 21: the whole sentence is a bit confusing and grammatically not correct
+9) Control Protocols, Page 3, Line 32: "packet sent" to "sent packet"
+10) Control Protocols, Page 4, Line 4: "a" is too much
+11) Control Protocols, Page 5, Line 1: "the" is too much
+12) Control Protocols, Page 5, Line 28: one "and" is too much
+13) most pictures have a bad quality
+14) No citations/bibliography 

@@ -82,12 +82,35 @@ Justification for "Not Satisfactory": Not available
 2) Introduction, Page 2, Line 7: "the" can be discarded
 3) Introduction, Page 2, Line 14: "acknowledgement" should be plural
 4) Introduction, Page 2, Line 21: Double "in"
-5) Page 2: Control Protocols hat also Number 2, like Introduction
+5 Control Protocols, Page 2, Figure 2: DSAP, never explained
+6) Page 2: Control Protocols hat also Number 2, like Introduction
+Stop-and-wait/PAR, Page 3, PAR: explained afterwards/not directly
+Stop-and-wait/PAR, Page 3, ... Which is based.. -> Was this a whole sentence?
+Stop-and-wait/PAR, Page 3, ARQ(Automatic -> missing space
+Stop-and-wait/PAR, Page 3, as if it’s too short than -> "then"
+Stop-and-Wait / PAR / SeqNo., Page 3, sequence no(Fig 5). -> missing space, "sequence no."
+Stop-and-Wait / PAR / SeqNo., Page 3, Syntax: fig.5 -> Fig. 5
+Stop-and-Wait / NAC+ACK / SeqNo, Page 3, Stop-and-Wait / NAC+ACK / SeqNo -> NAC? shoud be NAK OR NACK (see figure 6)
+Stop-and-Wait / NAC+ACK / SeqNo, Page 3, they assume they everything -> they assume that?
+Stop-and-Wait / NAC+ACK / SeqNo, Page 3, was sent was sent -> one time should be enough, don't you think?
+Stop-and-Wait / NAC+ACK / SeqNo, Page 3, In this case, Stop-and-Wait / NAC+ACK / SeqNo, fig.... -> NAC? or NAK?? (see figure 6)
+Stop-and-Wait / NAC+ACK / SeqNo, Page 3, In this case, Stop-and-Wait / NAC+ACK / SeqNo, fig.... -> is the figure part of the sentence?
 6) Control Protocols, Page 3, Line 8: "isan" to "is an"
 7) Control Protocols, Page 3, Line 17: "terminal" to "time"
 8) Control Protocols, Page 3, Line 21: the whole sentence is a bit confusing and grammatically not correct
 9) Control Protocols, Page 3, Line 32: "packet sent" to "sent packet"
+Sliding Window, Page 4, protocol(Fig 7) -> missing space..and dot....
+Sliding Window, Page 4, which implies and both, sender -> implies what?
+Sliding Window, Page 4, Protocol works by... -> The protocol...
+Sliding Window, Page 4, When to increment lower and -> When the lower and upper bound has to be incremented..?
+Sliding Window, Page 4, if nothing has been sent sender could -> ..., the sender could...
+Sliding Window, Page 4, Format: Unaligned Text-Block starting at "Sending of frames depends"
 10) Control Protocols, Page 4, Line 4: "a" is too much
+Sliding Window, Page 5, At the sender stored frames -> At the sender side...?
+Sliding Window: Go-back-N(Error Treatment), Page 5, ...is found faulty then protocol all the other -> sorry but I can't make a Reim on that
+Sliding Window: Go-back-N(Error Treatment), Page 5, ...is found faulty then protocol all the other -> sorry but I can't make a Reim on that
+Sliding Window: Go-back-N(Error Treatment), Page 5, ...protocol until-unless -> until or unless? please decide
+Sliding Window: Go-back-N(Error Treatment), Page 5, Optimization for this approach is to have -> One Optimization for..
 11) Control Protocols, Page 5, Line 1: "the" is too much
 12) Control Protocols, Page 5, Line 28: one "and" is too much
 13) most pictures have a bad quality

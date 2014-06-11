@@ -4,10 +4,8 @@ KN1 Bonus, SS 2014
 
 About this Review:
 ------------------
-* Reviewed report: 
-Routing in Ad-Hoc Networks - A Comparison of Proactive and Reactive Routing Protocols
-* Number of Pages: 
-6
+* Reviewed report: Routing in Ad-Hoc Networks - A Comparison of Proactive and Reactive Routing Protocols
+* Number of Pages: 6
 
 Review:
 -------
@@ -45,13 +43,13 @@ if there is any traffic.
 [ ] Low (i.e. don't feel sure about the review made -try not to select this!-)#
 
 1.f. Justification of your decision:
-Routing protocols where already handled in different lectures.
+----FILL WITH TEXT-----
 
 2. About the Presentation of the Document
 
 2.a. Overall Organization of the report:
-[x] Satisfactory
-[ ] Could be Improved#
+[ ] Satisfactory
+[x] Could be Improved#
 [ ] Poor
 
 2.b. Title and Abstract:
@@ -88,6 +86,31 @@ Justification for "Not Satisfactory":
 3. For the Improvement
 
 3.a. Detailed comments and suggestions for the authors to improve the report. Please number each comment (1., 2., 3. etc.). Use as many as required. If possible, indicate page, section and paragraph number. Consider restructurations, proper citation of sources, further elaboration of a particular section, typos, formatting, etc. Do *NOT* indicate what was plagiarised by the authors or where:
+
+Introduction, page 1
+	(cf. Figure ?? for a -> which one? Can we chose?
+	spelling error:	the network Hence, ...
+proactive routing protocols, page 2
+	spelling error: disadvantages of procative routing -> practive
+	recursive process in Figure ??. -> which one?
+A. Dynamic Source Routing (DSR), page 4
+	Is the buffer full the packet waiting... -> That goes better, couldn't it? (language)
+	DSR implements a simply -> simple
+I) Path Setup:, page 4
+	source address , -> space
+	seq.number -> space
+	with a more recent seq.number -> space
+	from D,E and F -> space
+2) Routing Table
+	it saves sequence number -> numbers
+	it saves sequence number -> inconsistent use of "seq. number" vs. "sequence number" (see previous occurences)
+C. Pros and Cons of Reactive Routing, page 5
+	Fig. 7: Average end-to-end delay for varying node desity [16] -> density
+Conclusion, page 6
+	restricted w.r.t. to their -> to to? "w[with] r[egard] t[o] their"
+	spelling error:	both proactive and reative -> reactive
+	still yield te best -> the
+	
 Page 1, Proactive Routing Protocols, Line 6: Missing Point between topology and It
 Page 2: 4 column --> four columns
 Page 3: 3) Packet Routing: "When a receiving a packet..." --> First a is too much

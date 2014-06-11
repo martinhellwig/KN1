@@ -15,8 +15,8 @@ Review:
 
 1.a. Overall Rating:
 [ ] Very Good
-[x] Good
-[ ] Not Good
+[ ] Good
+[x] Not Good
 [ ] Wrong
 If wrong, please justify:
 
@@ -27,7 +27,11 @@ If wrong, please justify:
 [ ] Low, Superficial#
 
 1.d. Report Summary (indicate the main idea, contribution/solution, conclusions)(10 lines maximum, to be used by us only -not to be sent to authors-):
-They want to show how to deal with errors in communication. For this approach they presented a few possobilities to achhieve an error-free communication. As the last and best solution they show the Sliding-Windows-approach. For this purpose they used many pictures to visualize the proceed of the protocol. Short textes explain the pictures and the use of lower and upper bounds.
+They want to show how to deal with errors in communication. For this approach 
+they presented a few possobilities to achhieve an error-free communication. As 
+the last and best solution they show the Sliding-Windows-approach. For this purpose 
+they used many pictures to visualize the proceed of the protocol. Short textes 
+explain the pictures and the use of lower and upper bounds.
 
 1.e. Reviewer Confidence:
 [ ] High (i.e. have read and understand most/all of the bibliography)#
@@ -55,8 +59,8 @@ Justification for "Not":
 Justification for "No": Has only 5 sites, but wants to add some stuff to fill out the 6 sites
 
 2.d. Adequate Definition of Symbols, Terms, Concepts:
-[x] Yes
-[ ] Not always
+[ ] Yes
+[x] Not always
 [ ] No
 Justification for "No": 
 
@@ -83,7 +87,7 @@ Justification for "Not Satisfactory": Not available
 2) Introduction, Page 2, Line 7: "the" can be discarded
 3) Introduction, Page 2, Line 14: "acknowledgement" should be plural
 4) Introduction, Page 2, Line 21: Double "in"
-5 Control Protocols, Page 2, Figure 2: DSAP, never explained
+5) Control Protocols, Page 2, Figure 2: DSAP, never explained
 6) Page 2: Control Protocols has also Number 2, like Introduction
 Stop-and-wait/PAR, Page 3, PAR: explained afterwards/not directly
 Stop-and-wait/PAR, Page 3, ... Which is based.. -> Was this a whole sentence?
@@ -93,7 +97,7 @@ Stop-and-Wait / PAR / SeqNo., Page 3, sequence no(Fig 5). -> missing space, "seq
 Stop-and-Wait / PAR / SeqNo., Page 3, Syntax: fig.5 -> Fig. 5
 Stop-and-Wait / NAC+ACK / SeqNo, Page 3, Stop-and-Wait / NAC+ACK / SeqNo -> NAC? shoud be NAK OR NACK (see figure 6)
 Stop-and-Wait / NAC+ACK / SeqNo, Page 3, they assume they everything -> they assume that?
-Stop-and-Wait / NAC+ACK / SeqNo, Page 3, was sent was sent -> one time should be enough, don't you think?
+Stop-and-Wait / NAC+ACK / SeqNo, Page 3, was sent was sent -> one time should be enough
 Stop-and-Wait / NAC+ACK / SeqNo, Page 3, In this case, Stop-and-Wait / NAC+ACK / SeqNo, fig.... -> NAC? or NAK?? (see figure 6)
 Stop-and-Wait / NAC+ACK / SeqNo, Page 3, In this case, Stop-and-Wait / NAC+ACK / SeqNo, fig.... -> is the figure part of the sentence?
 6) Control Protocols, Page 3, Line 8: "isan" to "is an"
@@ -115,3 +119,4 @@ Sliding Window: Go-back-N(Error Treatment), Page 5, Optimization for this approa
 12) Control Protocols, Page 5, Line 28: one "and" is too much
 13) most pictures have a bad quality
 14) No citations/bibliography 
+15) Graduation in title along with name?

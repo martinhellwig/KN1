@@ -35,7 +35,7 @@ They want to show how to deal with errors in communication. For this approach th
 [ ] Low (i.e. don't feel sure about the review made -try not to select this!-)#
 
 1.f. Justification of your decision:
-We had this topic three times (NCS, KN2 and now in KN1). We think we know how Sliding Window works.
+While reading this paper ou get a good understanding what the Sliding Window approach is used for. The problem of occuring errors in communication is said and several approaches are presented. 
 
 2. About the Presentation of the Document
 
@@ -84,7 +84,7 @@ Justification for "Not Satisfactory": Not available
 3) Introduction, Page 2, Line 14: "acknowledgement" should be plural
 4) Introduction, Page 2, Line 21: Double "in"
 5 Control Protocols, Page 2, Figure 2: DSAP, never explained
-6) Page 2: Control Protocols hat also Number 2, like Introduction
+6) Page 2: Control Protocols has also Number 2, like Introduction
 Stop-and-wait/PAR, Page 3, PAR: explained afterwards/not directly
 Stop-and-wait/PAR, Page 3, ... Which is based.. -> Was this a whole sentence?
 Stop-and-wait/PAR, Page 3, ARQ(Automatic -> missing space

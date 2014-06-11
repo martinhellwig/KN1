@@ -15,8 +15,8 @@ Review:
 1. The Content
 
 1.a. Overall Rating:
-[x] Very Good
-[ ] Good
+[ ] Very Good
+[x] Good
 [ ] Not Good
 [ ] Wrong
 If wrong, please justify:
@@ -28,6 +28,15 @@ If wrong, please justify:
 [ ] Low, Superficial#
 
 1.d. Report Summary (indicate the main idea, contribution/solution, conclusions)(10 lines maximum, to be used by us only -not to be sent to authors-):
+The summary explains proative and reactive routing protocols regarding to ad-hoc networks.
+Routing protocols are needed to send messages to the right destination. In particular
+the Link State Routing (OLSR) and Destination-Sequenced Distance Vector Routing (DSDV)
+is explained as representants for the former type and Dynamic Source Routing (DSR) and
+Ad-Hoc On-Demand Distance Vector Routing (AODV) for the latter type of protocol.
+The advantage of proactive protocols is the capability of sending packets without delay
+but they introduce additional overhead. The advantage of reactive protocols is a small
+overhead as long as there are no messages but routing information are only updatet
+if there is any traffic.
 
 
 1.e. Reviewer Confidence:
@@ -36,13 +45,13 @@ If wrong, please justify:
 [ ] Low (i.e. don't feel sure about the review made -try not to select this!-)#
 
 1.f. Justification of your decision:
-
+Routing protocols where already handled in different lectures.
 
 2. About the Presentation of the Document
 
 2.a. Overall Organization of the report:
-[x] Satisfactory
-[ ] Could be Improved#
+[ ] Satisfactory
+[x] Could be Improved#
 [ ] Poor
 
 2.b. Title and Abstract:
@@ -56,8 +65,8 @@ Justification for "Not":
 Justification for "No": 
 
 2.d. Adequate Definition of Symbols, Terms, Concepts:
-[x] Yes
-[ ] Not always
+[ ] Yes
+[x] Not always
 [ ] No
 Justification for "No": 
 
@@ -73,9 +82,33 @@ Justification for "No":
 Justification for "Not Satisfactory": 
 
 2.g. Plagiarism:
-[x] No plagiarism found
-[ ] Plagiarism found
+[ ] No plagiarism found
+[x] Plagiarism found
 
 3. For the Improvement
 
 3.a. Detailed comments and suggestions for the authors to improve the report. Please number each comment (1., 2., 3. etc.). Use as many as required. If possible, indicate page, section and paragraph number. Consider restructurations, proper citation of sources, further elaboration of a particular section, typos, formatting, etc. Do *NOT* indicate what was plagiarised by the authors or where:
+
+Introduction, page 1
+	(cf. Figure ?? for a -> which one? Can we chose?
+	spelling error:	the network Hence, ...
+proactive routing protocols, page 2
+	spelling error: disadvantages of procative routing -> practive
+	recursive process in Figure ??. -> which one?
+A. Dynamic Source Routing (DSR), page 4
+	Is the buffer full the packet waiting... -> That goes better, couldn't it? (language)
+	DSR implements a simply -> simple
+I) Path Setup:, page 4
+	source address , -> space
+	seq.number -> space
+	with a more recent seq.number -> space
+	from D,E and F -> space
+2) Routing Table
+	it saves sequence number -> numbers
+	it saves sequence number -> inconsistent use of "seq. number" vs. "sequence number" (see previous occurences)
+C. Pros and Cons of Reactive Routing, page 5
+	Fig. 7: Average end-to-end delay for varying node desity [16] -> density
+Conclusion, page 6
+	restricted w.r.t. to their -> to to? "w[with] r[egard] t[o] their"
+	spelling error:	both proactive and reative -> reactive
+	still yield te best -> the

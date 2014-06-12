@@ -1,0 +1,159 @@
+Peer Review
+KN1 Bonus, SS 2014
+----------------------------
+
+About this Review:
+------------------
+* Reviewed report: Proactive and Reactive Routing Protocols
+* Number of Pages: 6
+
+
+Review:
+-------
+
+1. The Content
+
+1.a. Overall Rating:
+[ ] Very Good
+[x] Good
+[ ] Not Good
+[ ] Wrong
+If wrong, please justify:
+
+1.c. Technical Depth:
+[ ] Very High, Suitable Only for an Expert#
+[x] High, Appropriate for the generally knowledgeable individual working in the field
+[ ] Medium, Suitable for the non-specialist#
+[ ] Low, Superficial#
+
+1.d. Report Summary (indicate the main idea, contribution/solution, conclusions)(10 lines maximum, to be used by us only -not to be sent to authors-):
+
+
+1.e. Reviewer Confidence:
+[ ] High (i.e. have read and understand most/all of the bibliography)#
+[x] Medium (i.e. have partially read the bibliography, understands it partially)
+[ ] Low (i.e. don't feel sure about the review made -try not to select this!-)#
+
+1.f. Justification of your decision:
+same
+
+2. About the Presentation of the Document
+
+2.a. Overall Organization of the report:
+[x] Satisfactory
+[ ] Could be Improved#
+[ ] Poor
+
+2.b. Title and Abstract:
+[x] Satisfactory
+[ ] Not Satisfactory
+Justification for "Not": 
+
+2.c. Appropriate report Length:
+[x] Yes
+[ ] No
+Justification for "No": 
+
+2.d. Adequate Definition of Symbols, Terms, Concepts:
+[x] Yes
+[ ] Not always
+[ ] No
+Justification for "No": 
+
+2.e. Language:
+[ ] Satisfactory
+[x] Needs Improvement#
+[ ] Not Satisfactory
+
+
+2.f. Bibliography: 
+[x] Satisfactory
+[ ] Not Satisfactory
+Justification for "Not Satisfactory": 
+
+2.g. Plagiarism:
+[ ] No plagiarism found
+[ ] Plagiarism found
+Fig4?
+
+3. For the Improvement
+
+3.a. Detailed comments and suggestions for the authors to improve the report. Please number each comment (1., 2., 3. etc.). Use as many as required. If possible, indicate page, section and paragraph number. Consider restructurations, proper citation of sources, further elaboration of a particular section, typos, formatting, etc. Do *NOT* indicate what was plagiarised by the authors or where:
+
+1. Logic:
+a) OSLR B 1) line 5+10: "increment metric", the metric is the distance. Does it make sense to increase it each time receiving a general update?
+b) In figure 3 the list is actually from node 6 not node 4 as mentioned in the caption.
+
+2. Language:
+a) too much "that", "is that"
+b) too many commata
+c) regarding nodes: maybe "it" instead of "he"
+
+3. Spelling:
+a) installment (Teilzahlung) -> installation
+b) seq.number/seq. number
+c) detailed listing:
+Abstract:
+	line 3:	_on_ the internet
+	4:	fiends_._ The
+Intro:
+	2nd paragraph:
+		15:	figure (_??_)
+		18:	network_._ Hence
+	3rd p:
+		1:	_p_roactive (enumeration)
+	5th p:
+		last:	we we
+II.
+OLSR:
+	1st p:
+		4:	its' -> its
+		7:	its -> it is
+		8:	broadcast_ed_ its_'_
+	2nd p:
+		2:	final_e_
+		3:	send -> sent
+		7+23:	column_s_
+		26:	is buil_t_
+		30:	as well
+B
+3)
+	4:	when _a_ receiving
+4)
+	1:	and _a_ loop free
+
+III.
+	4:	possibly -> possible
+A
+1)
+	4:	broadcast_ed_
+	12:	in this _the_ case
+2)
+	3:	simply -> simple
+	12:	start_s_
+3)
+	7:	relying_,_ on
+B
+1)
+	2nd p:
+		12:	brackets better to the end of the sentence
+	3d p:
+		7:	addresse_s_
+2)
+	3:	number_s_ OR _the_ number
+4)
+	5:	should be sen_t_
+
+IV.
+	2nd p:
+		4:	this is _helpful_ esp. (...) application_s_
+V.
+	2nd p:
+		7:	Inter _Z_one _R_outing _P_rotocol
+VI.
+	2nd p:
+		4:	te -> the
+
+
+
+

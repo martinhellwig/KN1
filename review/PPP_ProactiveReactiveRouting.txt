@@ -101,7 +101,7 @@ I) Path Setup:, page 4
 	seq.number -> space
 	with a more recent seq.number -> space
 	from D,E and F -> space
-2) Routing Table
+2) Routing Table, page 4
 	it saves sequence number -> numbers
 	it saves sequence number -> inconsistent use of "seq. number" vs. "sequence number" (see previous occurences)
 C. Pros and Cons of Reactive Routing, page 5

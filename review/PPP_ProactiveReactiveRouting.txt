@@ -88,31 +88,99 @@ Justification for "Not Satisfactory":
 3.a. Detailed comments and suggestions for the authors to improve the report. Please number each comment (1., 2., 3. etc.). Use as many as required. If possible, indicate page, section and paragraph number. Consider restructurations, proper citation of sources, further elaboration of a particular section, typos, formatting, etc. Do *NOT* indicate what was plagiarised by the authors or where:
 
 Introduction, page 1
-	(cf. Figure ?? for a -> which one? Can we chose?
-	spelling error:	the network Hence, ...
+	1) cf. Figure ?? for a -> which one?
+	2) spelling error:	the network Hence, ...
 proactive routing protocols, page 2
-	spelling error: disadvantages of procative routing -> practive
-	recursive process in Figure ??. -> which one?
+	3) spelling error: disadvantages of procative routing -> practive
+	4) recursive process in Figure ??. -> which one?
 A. Dynamic Source Routing (DSR), page 4
-	Is the buffer full the packet waiting... -> That goes better, couldn't it? (language)
-	DSR implements a simply -> simple
+	5) Is the buffer full the packet waiting... -> That goes better, couldn't it? (language)
+	6) DSR implements a simply -> simple
 I) Path Setup:, page 4
-	source address , -> space
-	seq.number -> space
-	with a more recent seq.number -> space
-	from D,E and F -> space
+	7) source address , -> space
+	8) seq.number -> space
+	9) with a more recent seq.number -> space
+	10 from D,E and F -> space
 2) Routing Table, page 4
-	it saves sequence number -> numbers
-	it saves sequence number -> inconsistent use of "seq. number" vs. "sequence number" (see previous occurences)
+	11) it saves sequence number -> numbers
+	12) it saves sequence number -> inconsistent use of "seq. number" vs. "sequence number" (see previous occurences)
 C. Pros and Cons of Reactive Routing, page 5
-	Fig. 7: Average end-to-end delay for varying node desity [16] -> density
+	13) Fig. 7: Average end-to-end delay for varying node desity [16] -> density
 Conclusion, page 6
-	restricted w.r.t. to their -> to to? "w[with] r[egard] t[o] their"
-	spelling error:	both proactive and reative -> reactive
-	still yield te best -> the
+	14) restricted w.r.t. to their -> to to? "w[with] r[egard] t[o] their"
+	15) spelling error:	both proactive and reative -> reactive
+	16) still yield te best -> the
 	
-Page 1, Proactive Routing Protocols, Line 6: Missing Point between topology and It
-Page 2: 4 column --> four columns
-Page 3: 3) Packet Routing: "When a receiving a packet..." --> First a is too much
-Page 3: 4) Characteristics: "DSDV is very simple..." --> DSDV is a very...
-Page 4: 2) Route Maintenance: "... is routed back message's sender" --> ... is routed back to the sender of the message.
+17) Page 1, Proactive Routing Protocols, Line 6: Missing Point between topology and It
+18) Page 2: 4 column --> four columns
+19) Page 3: 3) Packet Routing: "When a receiving a packet..." --> First a is too much
+20) Page 3: 4) Characteristics: "DSDV is very simple..." --> DSDV is a very...
+21) Page 4: 2) Route Maintenance: "... is routed back message's sender" --> ... is routed back to the sender of the message.
+
+Logic:
+22) OSLR B 1) line 5+10: "increment metric", the metric is the distance. Does it make sense to increase it each time receiving a general update?
+23) In figure 3 the list is actually from node 6 not node 4 as mentioned in the caption.
+
+Language:
+24) too much "that", "is that"
+25) too many commata
+26) regarding nodes: maybe "it" instead of "the"
+
+Spelling:
+27) installment (Teilzahlung) -> installation
+28) seq.number/seq. number
+	detailed listing:
+		Abstract:
+			29) line 3:	_on_ the internet
+			30) 4:	fiends_._ The
+		Intro (I):
+			2nd paragraph:
+				31) 15:	figure (_??_)
+				32) 18:	network_._ Hence
+			3rd p:
+				33) 1:	_p_roactive (enumeration)
+			5th p:
+				34) last:	we we
+		OLSR (II):
+			1st p:
+				35) 4:	its' -> its
+				36) 7:	its -> it is
+				37) 8:	broadcast_ed_ its_'_
+			2nd p:
+				38) 2:	final_e_
+				39) 3:	send -> sent
+				40) 7+23:	column_s_
+				41) 26:	is buil_t_
+				42) 30:	as well
+			B:
+				43) 4:	when _a_ receiving
+				44) 1:	and _a_ loop free
+
+		III:
+			45) 4:	possibly -> possible
+			A:
+				1:
+					45) 4:	broadcast_ed_
+					46) 12:	in this _the_ case
+				2:
+					47) 3:	simply -> simple
+					48) 12:	start_s_
+				3:
+					49) 7:	relying_,_ on
+			B:
+				1:
+					2nd p:
+						50) 12:	brackets better to the end of the sentence
+					3d p:
+						51) 7:	addresse_s_
+				2:
+					52) number_s_ OR _the_ number
+				4:
+					53)	should be sen_t_
+
+		IV:
+			2nd p:
+				54)	this is _helpful_ esp. (...) application_s_
+		V:
+			2nd p:
+				55)	Inter _Z_one _R_outing _P_rotocol

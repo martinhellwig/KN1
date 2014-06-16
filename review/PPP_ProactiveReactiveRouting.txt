@@ -43,7 +43,7 @@ if there is any traffic.
 [ ] Low (i.e. don't feel sure about the review made -try not to select this!-)#
 
 1.f. Justification of your decision:
-----FILL WITH TEXT-----
+Routing protocols where already handled in different lectures.
 
 2. About the Presentation of the Document
 

@@ -124,7 +124,7 @@ Logic:
 Language:
 24) too much "that", "is that"
 25) too many commata
-26) regarding nodes: maybe "it" instead of "the"
+26) regarding nodes: maybe "it" instead of "he"
 
 Spelling:
 27) installment (Teilzahlung) -> installation

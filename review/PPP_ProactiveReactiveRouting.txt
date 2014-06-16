@@ -91,7 +91,7 @@ Introduction, page 1
 	1) cf. Figure ?? for a -> which one?
 	2) spelling error:	the network Hence, ...
 proactive routing protocols, page 2
-	3) spelling error: disadvantages of procative routing -> practive
+	3) spelling error: disadvantages of procative routing -> proactive
 	4) recursive process in Figure ??. -> which one?
 A. Dynamic Source Routing (DSR), page 4
 	5) Is the buffer full the packet waiting... -> That goes better, couldn't it? (language)

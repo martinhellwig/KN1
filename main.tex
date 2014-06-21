@@ -22,8 +22,7 @@
 \hyphenation{op-tical net-works semi-conduc-tor} 
 \usepackage[pdftex]{graphicx}
 \begin{document} 
-%\title{Das Grundprinzip von PPP -- \\wie es funktioniert, Pros und Cons}
-\title{Eine Einführung in PPP -- \\wie es funktioniert, Pros und Cons}
+\title{Eine Einführung in PPP -- \\Funktionsweise, Pros und Cons}
 \author{\IEEEauthorblockN{Martin Hellwig, Michael Schulze, Michael Stahn}
 \IEEEauthorblockA{\\Kommunikationsnetze 1\\ Technische Universit\"at Darmstadt\\} }
 \maketitle 
@@ -69,7 +68,7 @@ PPP besteht aus folgenden drei Kernfunktionen:
 \end{figure}
 
 \subsection{Rahmenbildung}
-Die Rahmenbildungsmethode von PPP kennzeichnet eundeutig das Ende und den Anfang des nächsten Rahmens und kann Übertragungsfehler erkennen. Es ist ähnlich dem \textit{High-Level Data Link Control} (HDLC) Protokoll aufgebaut, ist statt diesem aber nicht bit- sondern byteorientiert. Dies bedeutet, dass immer eine gerade Anzahl von Bytes verwendet wird. Obwohl PPP auch zuverlässige Übertragungen bieten kann wird meist ein unnummerierter, also unbestätigter Datentransfer genutzt.
+Die Rahmenbildungsmethode von PPP kennzeichnet eindeutig das Ende und den Anfang des nächsten Rahmens und kann Übertragungsfehler erkennen. Es ist ähnlich dem \textit{High-Level Data Link Control} (HDLC) Protokoll aufgebaut, ist statt diesem aber nicht bit- sondern byteorientiert. Dies bedeutet, dass immer eine gerade Anzahl von Bytes verwendet wird. Obwohl PPP auch zuverlässige Übertragungen bieten kann, wird meist ein unnummerierter, also unbestätigter, Datentransfer genutzt.
 
 \begin{figure}[h!]
  \centering
@@ -81,8 +80,8 @@ Die Rahmenbildungsmethode von PPP kennzeichnet eundeutig das Ende und den Anfang
 Im Folgenden wird der detaillierte Aufbau eines PPP-Rahmens erläutert (siehe Abbildung \ref{fig:ppprahmen}).\\
 Das 1. Byte stellt dabei das sogenannte \textit{Flagbyte} dar, welches den Anfang und das Ende des Rahmens kennzeichnet und immer aus den Bits \texttt{01111110} (hexadezimal \texttt{0x7E}) besteht. Sollte im Payload die selbe Bitfolge vorkommen, wird diese vor dem Versand ``escaped'', also markiert und umgewandelt (auch Bytestopfen genannt). Hierfür wird diesem Byte ein weiteres Escapebyte vorangestellt (\texttt{0x7D}) und anschließend das Eigentliche mit \texttt{0x20} XOR-verknüpft. Somit wird aus dem Flagbyte im Payload \texttt{0x7D 0x5E}. Mithilfe des Escaping kann einfach nach Anfang und Ende des Rahmens gesucht werden. Beim Auslesen wird nach dem Flagbyte \texttt{0x7D} gesucht, selbiges bei Fund gelöscht und das nachfolgende wieder mit \texttt{0x20} XOR-verknüpft. Zwischen zwei Rahmen wird nur ein Flagbyte benötigt um beide abzugrenzen.\\
 Das 2. Byte ist das \textit{Addressbyte}, das immer auf \texttt{11111111} gesetzt ist um an allen Stationen durchgelassen zu werden. Ähnlich einem IP-Broadcast muss somit keine spezifische Adresse zugewiesen werden.\\
-Nach dem \textit{Addressbyte} folgt das \textit{Controlbyte}, welches immer mit \texttt{00000011} gesetzt ist, um anzugeben, dass der Rahmen unnummeriert ist. Bei schlechten Verbindungen mit Verlusten, wie z.\,B. drahtlose Netzwerke sollte die Rahmennummerierung aktiviert werden. Da \textit{Addressbyte} und \textit{Controlbyte} meist konstant sind, können Teilnehmer aushandeln die beiden Bytes nicht zu nutzen, letztlich also den Overhead der Rahmen zu vermindern.\\
-Das folgende Feld bezeichnet das Protokoll des sich im Payload befindenden Paket. Bitfolgen die mit einer 1 beginnen (ab \texttt{0x8000}), werden für PPP-Verbindungsprotokolle verwendet (z.\,B. LCP, NCP). Bitfolgen beginnend mit einer 0 bezeichnen Protokolle der Vermittlungsschicht (Schicht 3): IPv4/IPv6, aber auch z.\,B. IPX oder Appletalk. Das Feld ist standardmäßig 2 Byte groß, kann aber per LCP auch auf 1 Byte heruntergesetzt werden.\\
+Nach dem \textit{Addressbyte} folgt das \textit{Controlbyte}, welches immer mit \texttt{00000011} gesetzt ist, um anzugeben, dass der Rahmen unnummeriert ist. Bei schlechten Verbindungen mit Verlusten, wie z.\,B. drahtlosen Netzwerken, sollte die Rahmennummerierung aktiviert werden. Da \textit{Addressbyte} und \textit{Controlbyte} meist konstant sind, können Teilnehmer aushandeln die beiden Bytes nicht zu nutzen, letztlich also den Overhead der Rahmen zu vermindern.\\
+Das folgende Feld bezeichnet das Protokoll des sich im Payload befindenden Paket. Bitfolgen, die mit einer 1 beginnen (ab \texttt{0x8000}), werden für PPP-Verbindungsprotokolle verwendet (z.\,B. LCP, NCP). Bitfolgen beginnend mit einer 0 bezeichnen Protokolle der Vermittlungsschicht (Schicht 3): IPv4/IPv6, aber auch z.\,B. IPX oder Appletalk. Das Feld ist standardmäßig 2 Byte groß, kann aber per LCP auch auf 1 Byte heruntergesetzt werden.\\
 Der Payload beinhaltet die eigentlichen Daten, also Pakete anderer Protokolle. Seine Länge beträgt standardmäßig 1500~Byte, kann aber auch per LCP auf eine andere Größe vereinbart werden. Sind die zu übertragenen Daten kleiner als die definierte Payload-Größe, so kann mittels Padding aufgefüllt werden.
 %TODO Beispielwerte für Protokolle?
 Nach dem Payload folgt eine Checksumme (CRC), die über die Felder Address, Control, Protokoll und den Payload berechnet wird. Das Feld der Checksumme ist standardmäßig 2 Byte groß, kann aber auch auf 4 Byte verhandelt werden (CRC32). Durch diese Checksumme können Übertragungsfehler effektiv entdeckt werden.
@@ -92,7 +91,7 @@ Nach dem Payload folgt eine Checksumme (CRC), die über die Felder Address, Cont
 Das \textit{Link Control Protocol} (LCP) dient zum Aufbau, Konfiguration und Prüfung von PPP-Verbindungen. Zur Konfiguration dienen diverse Optionen, die in LCP-Paketen im Payload von PPP-Rahmen übertragen werden. Der initiierende Rechner schlägt Optionen vor, die vom Kommunikationspartner entweder angenommen oder komplett bzw. teilweise abgelehnt werden können. Mögliche Optionen sind u.\,a. die \textit{Maximum Receive Unit} (MRU), das Authentifizierungsprotokoll oder das Qualitätsprotokoll. Ersteres legt die maximale zu übermittelnde Paketgröße fest. Mögliche Authentifizierungsprotokolle sind z.\,B. das \textit{Password Authentication Protocol} (PAP) oder das \textit{Challenge Handshake Authentification Protocol} (CHAP). Über ein optionales Qualitätsprotokoll können Daten zur Verbindungsqualität ausgetauscht werden. Daneben gibt es noch eine Vielzahl weiterer Optionen, die sich z.\,B. um Komprimierung, Nummerierung oder Identifikation kümmern (LCP Erweiterungen).
 \paragraph{Network Control Protocol}
 Das \textit{Network Control Protocol} (NCP) enthält verschiedene Protokolle zur Aushandlung von Ende-zu-Ende Verbindungsoptionen der Teilnehmer. Am weitesten verbreitet ist dabei das \textit{Internet Protocol Control Protocol} (IPCP) für IPv4. Hierüber können Optionen wie IP-Adresse, Gateway, DNS-Server und Kompression ausgehandelt werden. Damit ist IPCP über Wählverbindungen in seiner Funktion ähnlich dem \textit{Dynamic Host Control Protocol} (DHCP) in Ethernet-Netzwerken.
-Neben IPCP gibt es weitere NPCs für andere Protokolle der Vermittlungsschicht beispielsweise IPV6CP für IPv6, IPXCP für IPX oder ATCP für Appletalk.
+Neben IPCP gibt es weitere NPCs für andere Protokolle der Vermittlungsschicht, beispielsweise IPV6CP für IPv6, IPXCP für IPX oder ATCP für Appletalk.
 
 
 \section{Kommunikationsabläufe}
@@ -110,13 +109,12 @@ simultanen Zugriffsmöglichkeiten des Ethernet kombiniert werden.
 Die Notwendigkeit für PPPoE resultierte aus dem Anfang dieses Jahrtausends
 einhergehenden Einzugs der DSL-Technologie und der notwendigen Umstrukturierung
 der benötigten Software und Hardware. Ziel war es, ein Protokoll zu entwickeln,
-welches die bis dahin vorherrschende Einwahlverfahren möglichst kostengünstig
+welches die bis dahin vorherrschenden Einwahlverfahren möglichst kostengünstig
 ersetzt. Mit PPPoE war es einerseits möglich die bis dahin bestehenden Software-Stacks für PPP
 mit minimalen Anpassungen weiter zu verwenden und ließ sich andererseits mit einfacher
 und damit günstiger Hardware umsetzen\cite{dslapp}.
 Eines der Haupteinsatzgebiete von PPPoE sind somit Breitbandzugänge über DSL-Anschlüsse,
-Wireless-Zugängen oder Kabelmodems und wird
-auch von vielen Internet Service Providern (ISP) zu diesem Zweck eingesetzt \cite[p.88]{cisconut}.\\
+Wireless-Zugänge oder Kabelmodems. Von vielen Internet Service Providern (ISP) wird es auch f\"ur diesen Zweck eingesetzt \cite[p.88]{cisconut}.\\
 %
 Der strukturelle Aufbau eines typischen PPPoE-Pakets ist in Abbildung \ref{fig:PPPoE_Bild} zu sehen.
 \begin{figure}[h!]
@@ -170,7 +168,7 @@ Abhängig von der Topologie können sich mehrere Server im Netzwerk befinden, we
 dieser Phase durch den Client entdeckt werden. Die Discovery-Phase selbst ist zustandslos, d.h.
 auf Seiten aller Kommunikationen werden keine Verbindungsinformationen gespeichert.\\
 Das erste gesendete PPPoE Active Discovery Initiation (PADI) Paket stellt ein Broadcast
-an alle im Netzwerk vorhanden Server dar. Dieses enthält den Namen des vom Client
+an alle im Netzwerk vorhandenen Server dar. Dieses enthält den Namen des vom Client
 angefragten Service, auf welches Server mit einem
 PPPoE Active Discovery Offer (PADO) Paket antworten. Das Antwortpaket
 hat als Zieladresse die des Clients und enthält neben dem Namen des Servers optional
@@ -178,7 +176,7 @@ weitere vom Server angebotene Service-Namen. Es folgt ein PPPoE Active Discovery
 mit welchem der Client den von ihm nun gewählten Server und Service unter allen
 gefundenen direkt adressiert. Nach Erhalt des PADR beginnt der Server mit dem Aufbau
 einer PPP Session und bestätigt dies mit einem PPPoE Active Discovery Session-confirmation (PADS) Paket.
-Diese enthält auch eine Session-ID, welche die folgende Session eindeutig Identifiziert.\\
+Dieses enthält auch eine Session-ID, welche die folgende Session eindeutig Identifiziert.\\
 %
 \subsubsection{Session}
 In der Sitzungsphase erfolgt die weitere Konfiguration der Verbindung, die Authentifikation des
@@ -226,10 +224,10 @@ von PPP lassen sich zunächst wie folgt zusammenfassen (vgl. \cite{ppp_slip_uniw
 \item \textbf{Mehrere Netzwerkprotokolle über einen Übertragungskanal:} Das ältere SLIP-Protokoll unterstützt immer nur ein einziges Netzwerkprotokoll.
 \item \textbf{Fehlerkorrekturverfahren:} Frames mit falschen Checksummen werden von PPP erneut vom Kommunikationspartner angefordert. Das ältere
 	SLIP unterstützt kein Fehlerkorrekturverfahren, sondern delegiert die Fehlerbehandlung an andere Protokolle weiter. Dies bedeutet i.d.R. zusätzliche
-	Arbeitsschritte welche die Fehlerkorrektur und somit auch die Übertragung verlangsamen können.
+	Arbeitsschritte,f welche die Fehlerkorrektur und somit auch die Übertragung verlangsamen können.
 \item \textbf{Software-Flußkontrolle:} Bei Aushandlung der Steuerzeichen über LCP kann PPP auch auf Datenübertragungseinrichtungen verwendet werden, die mit Software-Flußkontrolle (XON/XOFF) arbeiten -- z.B. zwischen Modem und Computer. SLIP unterstützt dies nicht.
 \item \textbf{Vereinfachung der Authentifizierung:} Bei identischem Authentisierungsverfahren beider Kommunikationspartner entfällt im allgemeinen die manuelle bzw. skriptgestützte Identifizierung beim Kommunikationspartner, was in vielen Fällen auch die Verwendung von Skripts überflüssig macht. SLIP unterstützt dies nicht.
-\item \textbf{Automatisches Aushandeln einer IP-Adresse:} PPP -- genauer IPCP -- unterstützt von sich aus das automatische Aushandeln einer dynamisch zugewiesenen IP-Adresse im gegensatz zu SLIP.
+\item \textbf{Automatisches Aushandeln einer IP-Adresse:} PPP -- genauer IPCP -- unterstützt von sich aus das automatische Aushandeln einer dynamisch zugewiesenen IP-Adresse, im Gegensatz zu SLIP.
 \item \textbf{Aushalndung der Kompression:} Die Kommunikationspartner handeln mittels IPCP aus, ob Van-Jacobson-Header-Compression verwendet werden soll. Im Fall von SLIP muss der Kommunikationspartner wissen, ob das Verfahren unterstützt wird oder nicht und die Software entsprechend konfigurieren.
 \end{itemize}
 %
@@ -237,13 +235,13 @@ Neben den Vorteilen existieren allerdings auch die folgenden Nachteile (vgl. \ci
 %
 \begin{itemize}
 \item \textbf{Verzögerung der Konfiguration:} Eine Aushandlung der Einstellungen durch das LCP und das darauffolgende Aushandeln der Einstellungen durch die verschiedenen NCPs kann einige Sekunden in Anspruch nehmen. Bei SLIP kommt es zu keiner Verzögerung.
-\item \textbf{Daten overhead:} PPP-Frames zur Übertragung von Netzwerkprotokolldaten enthalten zusätzlich zu den Daten standardmäßig 9 Bytes Steuer- und Kontrollinformation. Selbst unter Verwendung von Address-and-Control-Field-Compression und Protocol-Field-Compression womit Zusatzinformation somit auf 4 Bytes reduziert werden, sind das immer noch 3 Bytes mehr als bei der Verwendung von SLIP, das mit einem Byte an Zusatzinformation auskommt.
+\item \textbf{Daten overhead:} PPP-Frames zur Übertragung von Netzwerkprotokolldaten enthalten zusätzlich zu den Daten standardmäßig 9 Bytes Steuer- und Kontrollinformation. Selbst unter Verwendung von Address-and-Control-Field-Compression und Protocol-Field-Compression, womit Zusatzinformation somit auf 4 Bytes reduziert werden, sind das immer noch 3 Bytes mehr als bei der Verwendung von SLIP, das mit einem Byte an Zusatzinformation auskommt.
 \item \textbf{Zusätzliche Systemressourcen:} Der komplizierte Aufbau von PPP bedingt wesentlich mehr Systemressourcen (Rechenzeit, Speicher) als SLIP, das mit einer sehr einfachen Frame-Struktur auskommt. Bei schnellen PPP-Verbindungen und unzureichend ausgestatteten Computern kann dies zu Einbußen bei der Arbeitsgeschwindigkeit führen.
-\item \textbf{Größere zu übertragende Datenmenge:} Bei vielen mit LCP zu übertragenden Steuerzeichen, die vor der Übertragung umkodiert werden müssen, erhöht sich die zu übertragende Datenmenge, vorausgesetzt die zu übertragenden Datagramme enthalten viele solcher Steuerzeichen. Der Grund hierfür ist das jedes Steuerzeichen, das ursprünglich mit einem Byte dargestellt werden konnte, nach dem Umkodieren zwei Byte beansprucht. 
+\item \textbf{Größere zu übertragende Datenmenge:} Bei vielen mit LCP zu übertragenden Steuerzeichen, die vor der Übertragung umkodiert werden müssen, erhöht sich die zu übertragende Datenmenge, vorausgesetzt die zu übertragenden Datagramme enthalten viele solcher Steuerzeichen. Der Grund hierfür ist, dass jedes Steuerzeichen, das ursprünglich mit einem Byte dargestellt werden konnte, nach dem Umkodieren zwei Byte beansprucht. 
 \end{itemize}
 %
 \section{Fazit} 
-Wie in der Einf\"uhrung erw\"ahnt, war das Point-to-Point Protocol notwendig, da die damals aktuellen Standards nicht alle mittlerweile ben\"otigten Anforderungen erf\"ullen konnten. Durch die einfache Handhabung der aufgebauten verbindung f\"ur Netzwerkschichtprotokolle, ist vermutlich auch die große Verbreitung des Protokolls zu erkl\"aren. Bei fast allen M\"oglichkeiten eine Internetverbindung aufzubauen (sei es \"uber DSL oder im Mobilfunknetz) wird PPP als Einw\"ahlprotokoll genutzt. Zwar wird im Kabelnetz mittlerweile ein anderes Protokoll verwendet, doch durch die einfache Umsetzung des Point-to-Point Protokolls wird es wahrscheinlich noch einige Jahre der Standard beim Verbinden mit dem ISP sein.
+Wie in der Einf\"uhrung erw\"ahnt, war das Point-to-Point Protocol notwendig, da die damals aktuellen Standards nicht alle mittlerweile ben\"otigten Anforderungen erf\"ullen konnten. Durch die einfache Handhabung der aufgebauten Verbindung f\"ur Netzwerkschichtprotokolle, ist vermutlich auch die große Verbreitung des Protokolls zu erkl\"aren. Bei fast allen M\"oglichkeiten eine Internetverbindung aufzubauen (sei es \"uber DSL oder im Mobilfunknetz) wird PPP als Einw\"ahlprotokoll genutzt. Zwar wird im Kabelnetz mittlerweile ein anderes Protokoll verwendet, doch durch die einfache Umsetzung des Point-to-Point Protokolls wird es wahrscheinlich noch einige Jahre der Standard beim Verbinden mit dem ISP sein.
 
 \appendices 
 \ifCLASSOPTIONcaptionsoff 

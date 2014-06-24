@@ -22,7 +22,7 @@
 \hyphenation{op-tical net-works semi-conduc-tor} 
 \usepackage[pdftex]{graphicx}
 \begin{document} 
-\title{Eine Einführung in PPP -- \\Funktionsweise, Pros und Cons}
+\title{Eine Einführung in PPP -- \\Funktionsweise, Vor- und Nachteile}
 \author{\IEEEauthorblockN{Martin Hellwig, Michael Schulze, Michael Stahn}
 \IEEEauthorblockA{\\Kommunikationsnetze 1\\ Technische Universit\"at Darmstadt\\} }
 \maketitle 
@@ -78,10 +78,10 @@ Die Rahmenbildungsmethode von PPP kennzeichnet eindeutig das Ende und den Anfang
 \end{figure}
 
 Im Folgenden wird der detaillierte Aufbau eines PPP-Rahmens erläutert (siehe Abbildung \ref{fig:ppprahmen}).\\
-Das 1. Byte stellt dabei das sogenannte \textit{Flagbyte} dar, welches den Anfang und das Ende des Rahmens kennzeichnet und immer aus den Bits \texttt{01111110} (hexadezimal \texttt{0x7E}) besteht. Sollte im Payload die selbe Bitfolge vorkommen, wird diese vor dem Versand ``escaped'', also markiert und umgewandelt (auch Bytestopfen genannt). Hierfür wird diesem Byte ein weiteres Escapebyte vorangestellt (\texttt{0x7D}) und anschließend das Eigentliche mit \texttt{0x20} XOR-verknüpft. Somit wird aus dem Flagbyte im Payload \texttt{0x7D 0x5E}. Mithilfe des Escaping kann einfach nach Anfang und Ende des Rahmens gesucht werden. Beim Auslesen wird nach dem Flagbyte \texttt{0x7D} gesucht, selbiges bei Fund gelöscht und das nachfolgende wieder mit \texttt{0x20} XOR-verknüpft. Zwischen zwei Rahmen wird nur ein Flagbyte benötigt um beide abzugrenzen.\\
+Das 1. Byte stellt dabei das sogenannte \textit{Flagbyte} dar, welches den Anfang und das Ende des Rahmens kennzeichnet und immer aus den Bits \texttt{01111110} (hexadezimal \texttt{0x7E}) besteht. Sollte im Payload die selbe Bitfolge vorkommen, wird diese vor dem Versand ``escaped'', also markiert und umgewandelt (auch Bytestopfen genannt). Hierfür wird diesem Byte ein weiteres Escapebyte vorangestellt (\texttt{0x7D}) und anschließend das Eigentliche mit \texttt{0x20} XOR-verknüpft. Somit wird aus dem Flagbyte im Payload \texttt{0x7D 0x5E}. Mithilfe des Escaping kann einfach nach Anfang und Ende des Rahmens gesucht werden. Beim Auslesen wird nach dem Escapebyte \texttt{0x7D} gesucht, selbiges bei Fund gelöscht und das nachfolgende wieder mit \texttt{0x20} XOR-verknüpft. Zwischen zwei Rahmen wird nur ein Flagbyte benötigt um beide abzugrenzen.\\
 Das 2. Byte ist das \textit{Addressbyte}, das immer auf \texttt{11111111} gesetzt ist um an allen Stationen durchgelassen zu werden. Ähnlich einem IP-Broadcast muss somit keine spezifische Adresse zugewiesen werden.\\
 Nach dem \textit{Addressbyte} folgt das \textit{Controlbyte}, welches immer mit \texttt{00000011} gesetzt ist, um anzugeben, dass der Rahmen unnummeriert ist. Bei schlechten Verbindungen mit Verlusten, wie z.\,B. drahtlosen Netzwerken, sollte die Rahmennummerierung aktiviert werden. Da \textit{Addressbyte} und \textit{Controlbyte} meist konstant sind, können Teilnehmer aushandeln die beiden Bytes nicht zu nutzen, letztlich also den Overhead der Rahmen zu vermindern.\\
-Das folgende Feld bezeichnet das Protokoll des sich im Payload befindenden Paket. Bitfolgen, die mit einer 1 beginnen (ab \texttt{0x8000}), werden für PPP-Verbindungsprotokolle verwendet (z.\,B. LCP (Link Control Protocol), NCP (NetWare Core Protocol)). Bitfolgen beginnend mit einer 0 bezeichnen Protokolle der Vermittlungsschicht (Schicht 3): IPv4/IPv6, aber auch z.\,B. IPX oder Appletalk. Das Feld ist standardmäßig 2 Byte groß, kann aber per LCP auch auf 1 Byte heruntergesetzt werden.\\
+Das folgende Feld bezeichnet das Protokoll des sich im Payload befindenden Paket. Bitfolgen, die mit einer 1 beginnen (ab \texttt{0x8000}), werden für PPP-Verbindungsprotokolle verwendet (z.\,B. LCP, NCP; siehe nächstes Kapitel). Bitfolgen beginnend mit einer 0 bezeichnen Protokolle der Vermittlungsschicht (Schicht 3): IPv4/IPv6, aber auch z.\,B. IPX oder Appletalk. Das Feld ist standardmäßig 2 Byte groß, kann aber per LCP auch auf 1 Byte heruntergesetzt werden.\\
 Der Payload beinhaltet die eigentlichen Daten, also Pakete anderer Protokolle. Seine Länge beträgt standardmäßig 1500~Byte, kann aber auch per LCP auf eine andere Größe vereinbart werden. Sind die zu übertragenen Daten kleiner als die definierte Payload-Größe, so kann mittels Padding aufgefüllt werden.
 %TODO Beispielwerte für Protokolle?
 Nach dem Payload folgt eine Checksumme (CRC), die über die Felder Address, Control, Protokoll und den Payload berechnet wird. Das Feld der Checksumme ist standardmäßig 2 Byte groß, kann aber auch auf 4 Byte verhandelt werden (CRC32). Durch diese Checksumme können Übertragungsfehler effektiv entdeckt werden.
@@ -248,11 +248,11 @@ Wie in der Einf\"uhrung erw\"ahnt, war das Point-to-Point Protocol notwendig, da
   \newpage 
 \fi
 \begin{thebibliography}{1} 
-\bibitem{IEEEhowto:kopka} 
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus 
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999. 
-Andrew S. Tanenbaum: Computer Networks, 5.th edition, Prentice Hall, 2011
-James F. Kurose / Keith W. Ross, Computernetzwerke, Pearson, 2012
+%\bibitem{IEEEhowto:kopka} 
+%H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus 
+%  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999. 
+%Andrew S. Tanenbaum: Computer Networks, 5.th edition, Prentice Hall, 2011
+%James F. Kurose / Keith W. Ross, Computernetzwerke, Pearson, 2012
 
 %RFC 1661 – Point-to-Point Protocol (PPP) July 1994;
 %RFC 1662 – Point-to-Point Protocol in HDLC-like Framing
